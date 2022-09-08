@@ -2,6 +2,7 @@
 
 from dessert import *
 
+# to test type: python3 -m pytest into the terminal
 
 def test_default():
     '''
@@ -98,3 +99,30 @@ def test_modify_cookie():
     cookie.price_per_dozen = 12.5
     assert cookie.price_per_dozen == 12.5
 
+    cookie = Cookie(12,5.5,'peanut')
+    cookie.name = 'chocolate'
+    assert cookie.name == 'chocolate'
+    cookie.cookie_quantity = 5
+    assert cookie.cookie_quantity == 5
+    cookie.price_per_dozen = 1.5
+    assert cookie.price_per_dozen == 1.5
+
+def test_modify_ice_cream():
+    '''
+    tests methods after modifying values of attributes of the IceCream class
+    '''
+    ice_cream = IceCream()
+    ice_cream.name = 'strawberry'
+    assert ice_cream.name == 'strawberry'
+    ice_cream.scoop_count = 1
+    assert ice_cream.scoop_count == 1
+    ice_cream.price_per_scoop = 0.5
+    assert ice_cream.price_per_scoop == 0.5
+
+    ice_cream = IceCream(3,6.5,'vanilla')
+    ice_cream.name = 'chocolate'
+    assert ice_cream.name == 'chocolate'
+    ice_cream.scoop_count = 1
+    assert ice_cream.scoop_count == 1
+    ice_cream.price_per_scoop = 1.5
+    assert ice_cream.price_per_scoop == 1.5
