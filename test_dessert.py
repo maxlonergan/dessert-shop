@@ -50,3 +50,24 @@ def test_alternate():
     assert sundae.topping_name == 'chocolate'
     assert sundae.topping_price == 4.0
     assert sundae.name == 'toppings'
+
+def test_modify_candy():
+    '''
+    tests methods after modifying values of attributes
+    '''
+    candy = Candy()
+    candy.name = 'caramel'
+    assert candy.name == 'caramel'
+    candy.candy_weight = 3.0
+    assert candy.candy_weight == 3.0
+    candy.price_per_pound = 6.0
+    assert candy.price_per_pound == 6.0
+
+    candy = Candy(3.0,4.0,'sucker')
+    candy.name = 'gum'
+    assert candy.name == 'gum'
+    candy.candy_weight = 1.0
+    assert candy.candy_weight == 1.0
+    candy.price_per_pound = 10.0
+    assert candy.price_per_pound == 10.0
+
