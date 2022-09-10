@@ -1,4 +1,6 @@
-# content of test_sample.py
+'''
+test cases for dessert.py
+'''
 
 from dessert import *
 
