@@ -10,6 +10,7 @@ class DessertItem:
     '''
     def __init__(self, name=''):
         self.name = name
+        self.order = []
 
 class Candy(DessertItem):
     def __init__(self, name='', candy_weight=1.5, price_per_pound=2.5):
@@ -34,3 +35,16 @@ class Sundae(IceCream):
         super().__init__(name, price_per_scoop)
         self.topping_name = topping_name
         self.topping_price = topping_price
+
+class Order():
+    def __init__(self):
+        self.order = DessertItem().order
+    def add(self):
+        
+        pass
+    def item_count(self):
+        pass
+order = Order()
+
+print(order.order)
+
