@@ -2,7 +2,7 @@
 
 from dessert import *
 
-# to test type: python3 -m pytest into the terminal
+# to test type: python3 -m pytest test_dessert.py into the terminal
 
 def test_default():
     '''
@@ -126,3 +126,24 @@ def test_modify_ice_cream():
     assert ice_cream.scoop_count == 1
     ice_cream.price_per_scoop = 1.5
     assert ice_cream.price_per_scoop == 1.5
+
+def test_modify_sundae():
+    '''
+    tests methods after modifying calues of attributes of the Sundae class
+    '''
+
+    sundae = Sundae()
+    sundae.name = 'candy'
+    assert sundae.name == 'candy'
+    sundae.topping_name = 'test name'
+    assert sundae.topping_name == 'test name'
+    sundae.topping_price = 4.0
+    assert sundae.topping_price == 4.0
+
+    sundae = Sundae('peanuts', 1.5, 'test name')
+    sundae.name = 'chocolate'
+    assert sundae.name == 'chocolate'
+    sundae.topping_name = 'candy'
+    assert sundae.topping_name == 'candy'
+    sundae.topping_price = 6.75
+    assert sundae.topping_price == 6.75
