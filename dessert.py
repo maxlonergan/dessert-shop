@@ -34,10 +34,3 @@ class Sundae(IceCream):
         super().__init__(name, price_per_scoop)
         self.topping_name = topping_name
         self.topping_price = topping_price
-
-
-
-candy = Candy()
-# sundae.price_per_scoop = 2.5
-
-print(candy.name)
