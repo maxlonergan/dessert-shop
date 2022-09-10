@@ -25,10 +25,10 @@ def test_default():
     assert ice_cream.price_per_scoop == 1.75
     assert ice_cream.name == ''
 
-    # sundae = Sundae()
-    # assert sundae.topping_name == 'sprinkles'
-    # assert sundae.topping_price == 2.5
-    # assert sundae.name == ''
+    sundae = Sundae()
+    assert sundae.topping_name == 'sprinkles'
+    assert sundae.topping_price == 2.5
+    assert sundae.name == ''
 
 # def test_alternate():
 #     '''
