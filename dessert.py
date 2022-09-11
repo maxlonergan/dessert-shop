@@ -31,8 +31,8 @@ class IceCream(DessertItem):
         self.price_per_scoop = price_per_scoop
 
 class Sundae(IceCream):
-    def __init__(self, name='', price_per_scoop=1.75, topping_name='sprinkles', topping_price=2.5):
-        super().__init__(name, price_per_scoop)
+    def __init__(self, name='', scoop_count=4, price_per_scoop=1.75, topping_name='sprinkles', topping_price=2.5):
+        super().__init__(name, price_per_scoop, scoop_count)
         self.topping_name = topping_name
         self.topping_price = topping_price
 
@@ -46,8 +46,23 @@ class Order():
     def item_count(self):
         return len(self.items)
 
-order = Order()
 
-order.add('Vanilla')
+def main():
+    '''
+    adds some items to the order class 
+    '''
+    order = Order()
+    order.add(Candy('Candy Corn', 1.5, .25))
+    order.add(Candy('Gummy Bears', .25, .35))
+    order.add(Cookie('Chocolate Chip', 6, 3.99))
+    order.add(IceCream('Pistachio', 2, 7.9))
+    order.add(Sundae('Vanilla', 3, .69, 'Hot Fudge', 1.29))
+    order.add(Cookie('Oatmeal Raisin', 2, 3.45))
 
-print(order.item_count())
+    for item in order.items:
+        print(item.name)
+
+    print(f'Total number of items in order: {order.item_count()}')
+
+
+main()
