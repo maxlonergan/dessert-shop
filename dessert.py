@@ -38,13 +38,16 @@ class Sundae(IceCream):
 
 class Order():
     def __init__(self):
-        self.order = DessertItem().order
-    def add(self):
-        
-        pass
+        self.items = DessertItem().order
+
+    def add(self,item):
+        self.items.append(item)
+
     def item_count(self):
-        pass
+        return len(self.items)
+
 order = Order()
 
-print(order.order)
+order.add('Vanilla')
 
+print(order.item_count())
