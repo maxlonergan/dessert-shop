@@ -30,7 +30,9 @@ def test_default():
     sundae = Sundae()
     assert sundae.topping_name == 'sprinkles'
     assert sundae.topping_price == 2.5
+    assert sundae.price_per_scoop == 1.75
     assert sundae.name == ''
+    assert sundae.scoop_count == 4
 
 def test_alternate():
     '''
@@ -53,8 +55,9 @@ def test_alternate():
     assert ice_cream.price_per_scoop == 2.5
     assert ice_cream.name == 'vanilla'
 
-    sundae = Sundae('test sundae',1.50,'chocolate',4.0)
+    sundae = Sundae('test sundae', 3 ,1.50,'chocolate',4.0)
     assert sundae.name == 'test sundae'
+    assert sundae.scoop_count == 3
     assert sundae.price_per_scoop == 1.50
     assert sundae.topping_name == 'chocolate'
     assert sundae.topping_price == 4.0
@@ -138,18 +141,23 @@ def test_modify_sundae():
     sundae = Sundae()
     sundae.name = 'candy'
     assert sundae.name == 'candy'
+    sundae.scoop_count = 1
+    assert sundae.scoop_count == 1
     sundae.topping_name = 'test name'
     assert sundae.topping_name == 'test name'
     sundae.topping_price = 4.0
     assert sundae.topping_price == 4.0
+    sundae.price_per_scoop = .5
+    assert sundae.price_per_scoop == .5
 
-    sundae = Sundae('peanuts', 1.5, 'test name', 4.75)
+    sundae = Sundae('peanuts',3, 1.5, 'test name', 4.75)
     sundae.name = 'chocolate'
     assert sundae.name == 'chocolate'
+    sundae.scoop_count = 6
+    assert sundae.scoop_count == 6
     sundae.price_per_scoop = 2.75
     assert sundae.price_per_scoop == 2.75
     sundae.topping_name = 'candy'
     assert sundae.topping_name == 'candy'
     sundae.topping_price = 6.75
     assert sundae.topping_price == 6.75
-    
