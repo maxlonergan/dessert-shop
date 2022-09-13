@@ -2,6 +2,9 @@
 test cases for dessert.py
 '''
 
+# maybe add some isinstance(x, int)
+# isinstance() can be set to check if a variable is a certain data type like int or str
+
 from dessert import *
 
 # to test type: python3 -m pytest test_dessert.py into the terminal
