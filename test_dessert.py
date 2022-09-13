@@ -1,5 +1,6 @@
 '''
 test cases for dessert.py
+to test type: python3 -m pytest test_dessert.py into the terminal
 '''
 
 # maybe add some isinstance(x, int)
