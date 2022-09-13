@@ -13,43 +13,64 @@ class DessertItem:
         self.order = []
 
 class Candy(DessertItem):
+    '''
+    candy class
+    '''
     def __init__(self, name='', candy_weight=1.5, price_per_pound=2.5):
         super().__init__(name)
         self.candy_weight = candy_weight
         self.price_per_pound = price_per_pound
 
 class Cookie(DessertItem):
+    '''
+    cookie class
+    '''
     def __init__(self, name='', cookie_quantity=5, price_per_dozen=3.5):
         super().__init__(name)
         self.cookie_quantity = cookie_quantity
         self.price_per_dozen = price_per_dozen
 
 class IceCream(DessertItem):
+    '''
+    ice cream class
+    '''
     def __init__(self, name='', price_per_scoop=1.75, scoop_count=4):
         super().__init__(name)
         self.scoop_count = scoop_count
         self.price_per_scoop = price_per_scoop
 
 class Sundae(IceCream):
+    '''
+    sundae class
+    '''
     def __init__(self, name='', scoop_count=4, price_per_scoop=1.75, topping_name='sprinkles', topping_price=2.5):
         super().__init__(name, price_per_scoop, scoop_count)
         self.topping_name = topping_name
         self.topping_price = topping_price
 
 class Order():
+    '''
+    order class
+    '''
     def __init__(self):
         self.items = DessertItem().order
 
     def add(self,item):
+        '''
+        adds an order to the item list
+        '''
         self.items.append(item)
 
     def item_count(self):
+        '''
+        returns how many items are in the order list
+        '''
         return len(self.items)
 
 
 def main():
     '''
-    adds some items to the order class 
+    adds some items to the order class
     '''
     order = Order()
     order.add(Candy('Candy Corn', 1.5, .25))
