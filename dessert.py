@@ -16,7 +16,7 @@ class DessertItem(ABC):
         pass
     def calculate_tax(self, cost):
         tax = .0725
-        actual_tax = cost * tax 
+        actual_tax = cost * tax
         return actual_tax
 
 class Candy(DessertItem):
@@ -114,9 +114,11 @@ class Order():
         count.append(cookie_two.calculate_cost(cookie_two.price_per_dozen))
 
         total = round(sum(count), 2)
-
-
         return total
+    
+    def order_tax(self):
+        pass
+
 
 
         
