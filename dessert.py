@@ -30,8 +30,8 @@ class Candy(DessertItem):
     def calculate_cost(self, price, weight):
         # tax = super().calculate_tax(price)
         actual_price = weight / price 
-        total = round(actual_price * weight, 2)
-        print(total)
+        sub_total = round(actual_price * weight, 2)
+        return sub_total
         
 
 class Cookie(DessertItem):
@@ -45,7 +45,7 @@ class Cookie(DessertItem):
     def calculate_cost(self, price):
         # tax = super().calculate_tax(price)
         total = round(price, 2)
-        print(total)
+        return total
 
 class IceCream(DessertItem):
     '''
@@ -59,7 +59,7 @@ class IceCream(DessertItem):
         sub_total = price * scoops
         # tax = super().calculate_tax(sub_total)
         total = round(sub_total, 2)
-        print(total)
+        return total
 
 class Sundae(IceCream):
     '''
@@ -73,7 +73,7 @@ class Sundae(IceCream):
         sub_total = (scoops * scoop_price) + topping_price
         # tax = super().calculate_tax(sub_total)
         total = round(sub_total, 2)
-        print(total)
+        return total
         
 
 class Order():
@@ -94,26 +94,59 @@ class Order():
         returns how many items are in the order list
         '''
         return len(self.items)
-    def order_cost(self):
-        pass
+
+    def order_cost(self, item_list):
+        '''
+        adds up the subtotal of the order before tax
+        '''
+        count = []
+        candy = item_list[0]
+        candy_two = item_list[1]
+        cookie = item_list[2]
+        ice_cream = item_list[3]
+        sundae = item_list[4]
+        cookie_two = item_list[5]
+        count.append(candy.calculate_cost(candy.price_per_pound, candy.candy_weight))
+        count.append(candy_two.calculate_cost(candy_two.price_per_pound, candy.candy_weight))
+        count.append(cookie.calculate_cost(cookie.price_per_dozen))
+        count.append(ice_cream.calculate_cost(ice_cream.price_per_scoop, ice_cream.scoop_count))
+        count.append(sundae.calculate_cost(sundae.scoop_count, sundae.price_per_scoop, sundae.topping_price))
+        count.append(cookie_two.calculate_cost(cookie_two.price_per_dozen))
+
+        total = round(sum(count), 2)
 
 
+        return total
+
+
+        
 def main():
     '''
     adds some items to the order class
     '''
     order = Order()
-    order.add(Candy('Candy Corn', 1.5, .25))
-    order.add(Candy('Gummy Bears', .25, .35))
-    order.add(Cookie('Chocolate Chip', 6, 3.99))
-    order.add(IceCream('Pistachio', 2, 7.99))
-    order.add(Sundae('Vanilla', 3, .69, 'Hot Fudge', 1.29))
-    order.add(Cookie('Oatmeal Raisin', 2, 3.45))
+    candy_one = Candy('Candy Corn', 1.5, .25)
+    candy_two = Candy('Gummy Bears', .25, .35)
+    cookie = Cookie('Chocolate Chip', 6, 3.99)
+    ice_cream = IceCream('Pistachio', 2, 7.99)
+    sundae = Sundae('Vanilla', 3, .69, 'Hot Fudge', 1.29)
+    cookie_two = Cookie('Oatmeal Raisin', 2, 3.45)
 
-    for item in order.items:
-        print(item.name)
+    order.add(candy_one)
+    order.add(candy_two)
+    order.add(cookie)
+    order.add(ice_cream)
+    order.add(sundae)
+    order.add(cookie_two)
 
-    print(f'Total number of items in order: {order.item_count()}')
+    # for item in order.items:
+    #     print(item.name)
+
+    # print(f'Total number of items in order: {order.item_count()}')
+    order_subtotal = order.order_cost(order.items)
+    print(order_subtotal)
+
+main()
 
 # candy = Candy()
 # cookie = Cookie()
@@ -123,4 +156,4 @@ def main():
 # candy.calculate_cost(candy.price_per_pound, candy.candy_weight)
 # cookie.calculate_cost(cookie.price_per_dozen)
 # ice_cream.calculate_cost(ice_cream.price_per_scoop, ice_cream.scoop_count)
-# sundae.calculate_cost(sundae.scoop_count, sundae.price_per_scoop, sundae.topping_price)
+# print(sundae.calculate_cost(sundae.scoop_count, sundae.price_per_scoop, sundae.topping_price))
