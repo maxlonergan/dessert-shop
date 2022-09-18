@@ -113,7 +113,7 @@ class Order():
         count.append(sundae.calculate_cost(sundae.scoop_count, sundae.price_per_scoop, sundae.topping_price))
         count.append(cookie_two.calculate_cost(cookie_two.price_per_dozen))
 
-        total = round(sum(count), 2)
+        total = count
         return total
     
     def order_tax(self, item_list):
@@ -128,7 +128,7 @@ class Order():
             elif isinstance(item, IceCream) == True:
                 tax_count.append(round(item.calculate_tax(item.price_per_scoop), 2))
         
-        return sum(tax_count)
+        return tax_count
             
 
 
@@ -152,15 +152,25 @@ def main():
     order.add(sundae)
     order.add(cookie_two)
 
-    # for item in order.items:
-    #     print(item.name)
-
-    # print(f'Total number of items in order: {order.item_count()}')
     order_subtotal = order.order_cost(order.items)
     tax_subttotal = order.order_tax(order.items)
+    subtotal_sum = round(sum(order_subtotal), 2)
+    tax_sum = sum(tax_subttotal)
+    
+    final_total = subtotal_sum + tax_sum
 
-    final_total = order_subtotal + tax_subttotal
-    print(final_total)
+    i = 0
+
+    for item in order.items:
+        print(f'{item.name}:      ${order_subtotal[i]}    [Tax: ${tax_subttotal[i]}]')
+        i += 1
+    print(f'Order Subtotals:   ${subtotal_sum}    [Tax: ${tax_sum}]')
+    print(f'Order total:   ${final_total}')
+    print(f'Total number of items in order: {order.item_count()}')
+
+
+    
+
 
 main()
 
