@@ -116,9 +116,20 @@ class Order():
         total = round(sum(count), 2)
         return total
     
-    def order_tax(self):
-        pass
-
+    def order_tax(self, item_list):
+        tax_count = []
+        for item in item_list:
+            if isinstance(item, Candy) == True:
+                tax_count.append(round(item.calculate_tax(item.price_per_pound), 2))
+            elif isinstance(item, Cookie) == True:
+                tax_count.append(round(item.calculate_tax(item.price_per_dozen), 2))
+            elif isinstance(item, Sundae) == True:
+                tax_count.append(round(item.calculate_tax(item.price_per_scoop), 2))
+            elif isinstance(item, IceCream) == True:
+                tax_count.append(round(item.calculate_tax(item.price_per_scoop), 2))
+        
+        return sum(tax_count)
+            
 
 
         
@@ -146,7 +157,10 @@ def main():
 
     # print(f'Total number of items in order: {order.item_count()}')
     order_subtotal = order.order_cost(order.items)
-    print(order_subtotal)
+    tax_subttotal = order.order_tax(order.items)
+
+    final_total = order_subtotal + tax_subttotal
+    print(final_total)
 
 main()
 
