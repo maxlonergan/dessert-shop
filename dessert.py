@@ -124,9 +124,9 @@ class Order():
             elif isinstance(item, Cookie) == True:
                 tax_count.append(round(item.calculate_tax(item.price_per_dozen), 2))
             elif isinstance(item, Sundae) == True:
-                tax_count.append(round(item.calculate_tax(item.price_per_scoop), 2))
+                tax_count.append(round(item.calculate_tax(item.price_per_scoop*item.scoop_count+item.topping_price), 2))
             elif isinstance(item, IceCream) == True:
-                tax_count.append(round(item.calculate_tax(item.price_per_scoop), 2))
+                tax_count.append(round(item.calculate_tax(item.price_per_scoop*item.scoop_count), 2))
         
         return tax_count
             
