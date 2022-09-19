@@ -138,6 +138,7 @@ def test_modify_ice_cream():
     assert ice_cream.price_per_scoop == 1.5
 
 def test_modify_sundae():
+
     '''
     tests methods after modifying calues of attributes of the Sundae class
     '''
@@ -165,3 +166,15 @@ def test_modify_sundae():
     assert sundae.topping_name == 'candy'
     sundae.topping_price = 6.75
     assert sundae.topping_price == 6.75
+
+def test_tax_attribute():
+    candy = Candy()
+    assert candy.tax_percent == 7.25
+
+def test_calculate_cost():
+    candy = Candy()
+    assert candy.calculate_cost(candy.candy_weight, candy.price_per_pound) == 4.17
+    cookie = Cookie()
+    assert cookie.calculate_cost(cookie.price_per_dozen) == 3.5
+    ice_cream = IceCream()
+    assert ice_cream.calculate_cost()

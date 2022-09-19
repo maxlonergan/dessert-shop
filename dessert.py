@@ -9,6 +9,7 @@ class DessertItem(ABC):
     Dessert super class, all classes will extend from here
     The default name attribute should be an empty string
     '''
+    tax_percent = 7.25
     def __init__(self, name=''):
         self.name = name
         self.order = []
@@ -28,12 +29,9 @@ class Candy(DessertItem):
         self.candy_weight = candy_weight
         self.price_per_pound = price_per_pound
     def calculate_cost(self, price, weight):
-        # tax = super().calculate_tax(price)
-        actual_price = weight / price 
-        sub_total = round(actual_price * weight, 2)
-        return sub_total
+        # actual_price = price / weight
+        return price * weight
         
-
 class Cookie(DessertItem):
     '''
     cookie class
@@ -98,6 +96,7 @@ class Order():
     def order_cost(self, item_list):
         '''
         adds up the subtotal of the order before tax
+        should probably rework to be closer to order_tax
         '''
         count = []
         candy = item_list[0]
@@ -117,6 +116,9 @@ class Order():
         return total
     
     def order_tax(self, item_list):
+        '''
+        returns the tax as a list of the tax of each item
+        '''
         tax_count = []
         for item in item_list:
             if isinstance(item, Candy) == True:
@@ -127,11 +129,7 @@ class Order():
                 tax_count.append(round(item.calculate_tax(item.price_per_scoop*item.scoop_count+item.topping_price), 2))
             elif isinstance(item, IceCream) == True:
                 tax_count.append(round(item.calculate_tax(item.price_per_scoop*item.scoop_count), 2))
-        
         return tax_count
-            
-
-
         
 def main():
     '''
@@ -141,7 +139,7 @@ def main():
     candy_one = Candy('Candy Corn', 1.5, .25)
     candy_two = Candy('Gummy Bears', .25, .35)
     cookie = Cookie('Chocolate Chip', 6, 3.99)
-    ice_cream = IceCream('Pistachio', 2, 7.99)
+    ice_cream = IceCream('Pistachio', 2, .79)
     sundae = Sundae('Vanilla', 3, .69, 'Hot Fudge', 1.29)
     cookie_two = Cookie('Oatmeal Raisin', 2, 3.45)
 
@@ -172,14 +170,12 @@ def main():
     
 
 
-main()
+# main()
 
-# candy = Candy()
-# cookie = Cookie()
-# ice_cream = IceCream()
-# sundae = Sundae()
+candy = Candy('Candy Corn', 1.5, .25)
+candy_two = Candy('Gummy Bears', .25, .35)
+print(candy.calculate_cost(candy.price_per_pound, candy.candy_weight))
+print(candy_two.calculate_cost(candy_two.price_per_pound, candy_two.candy_weight))
 
-# candy.calculate_cost(candy.price_per_pound, candy.candy_weight)
-# cookie.calculate_cost(cookie.price_per_dozen)
-# ice_cream.calculate_cost(ice_cream.price_per_scoop, ice_cream.scoop_count)
-# print(sundae.calculate_cost(sundae.scoop_count, sundae.price_per_scoop, sundae.topping_price))
+
+
