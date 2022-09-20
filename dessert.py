@@ -44,7 +44,6 @@ class Cookie(DessertItem):
         ratio = price / 12
         return ratio * amount
 
-
 class IceCream(DessertItem):
     '''
     ice cream class
@@ -55,8 +54,7 @@ class IceCream(DessertItem):
         self.price_per_scoop = price_per_scoop
     def calculate_cost(self, price, scoops):
         sub_total = price * scoops
-        # tax = super().calculate_tax(sub_total)
-        total = round(sub_total, 2)
+        total = sub_total
         return total
 
 class Sundae(IceCream):
@@ -175,9 +173,12 @@ def main():
 candy = Candy('Candy Corn', 1.5, .25)
 candy_two = Candy('Gummy Bears', .25, .35)
 cookie = Cookie('Chocolate Chip', 6, 3.99)
-print(candy.calculate_cost(candy.price_per_pound, candy.candy_weight))
-print(candy_two.calculate_cost(candy_two.price_per_pound, candy_two.candy_weight))
-print(cookie.calculate_cost(cookie.price_per_dozen, cookie.cookie_quantity))
+ice_cream = IceCream('Pistachio', 2, .79)
+sundae = Sundae('Vanilla', 3, .69, 'Hot Fudge', 1.29)
+cookie_two = Cookie('Oatmeal Raisin', 2, 3.45)
+print(ice_cream.calculate_cost(ice_cream.price_per_scoop, ice_cream.scoop_count))
+print(sundae.calculate_cost(sundae.scoop_count, sundae.price_per_scoop, sundae.topping_price))
+print(cookie_two.calculate_cost(cookie_two.price_per_dozen, cookie_two.cookie_quantity))
 
 
 
