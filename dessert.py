@@ -99,29 +99,16 @@ class Order():
         count = []
         for item in item_list:
             if isinstance(item, Candy) == True:
-                print('it works')
+                count.append(item.calculate_cost(item.price_per_pound, item.candy_weight))
             elif isinstance(item, Cookie) == True:
-                print('cooookies')
+                count.append(item.calculate_cost(item.price_per_dozen, item.cookie_quantity))
             elif isinstance(item, Sundae) == True:
-                print('sundaes rock')
+                count.append(item.calculate_cost(item.scoop_count, item.price_per_scoop, item.topping_price))
             elif isinstance(item, IceCream) == True:
-                print('I scream for ice cream')
-
-        # candy = item_list[0]
-        # candy_two = item_list[1]
-        # cookie = item_list[2]
-        # ice_cream = item_list[3]
-        # sundae = item_list[4]
-        # cookie_two = item_list[5]
-        # count.append(candy.calculate_cost(candy.price_per_pound, candy.candy_weight))
-        # count.append(candy_two.calculate_cost(candy_two.price_per_pound, candy.candy_weight))
-        # count.append(cookie.calculate_cost(cookie.price_per_dozen))
-        # count.append(ice_cream.calculate_cost(ice_cream.price_per_scoop, ice_cream.scoop_count))
-        # count.append(sundae.calculate_cost(sundae.scoop_count, sundae.price_per_scoop, sundae.topping_price))
-        # count.append(cookie_two.calculate_cost(cookie_two.price_per_dozen))
-
-        total = count
-        return total
+                count.append(item.calculate_cost(item.price_per_scoop, item.scoop_count))
+        print(count)
+        return count
+        
     
     def order_tax(self, item_list):
         '''
@@ -130,13 +117,14 @@ class Order():
         tax_count = []
         for item in item_list:
             if isinstance(item, Candy) == True:
-                tax_count.append(round(item.calculate_tax(item.price_per_pound), 2))
+                tax_count.append(item.calculate_tax(item.price_per_pound))
             elif isinstance(item, Cookie) == True:
-                tax_count.append(round(item.calculate_tax(item.price_per_dozen), 2))
+                tax_count.append(item.calculate_tax(item.price_per_dozen))
             elif isinstance(item, Sundae) == True:
-                tax_count.append(round(item.calculate_tax(item.price_per_scoop*item.scoop_count+item.topping_price), 2))
+                tax_count.append(item.calculate_tax(item.price_per_scoop*item.scoop_count+item.topping_price))
             elif isinstance(item, IceCream) == True:
-                tax_count.append(round(item.calculate_tax(item.price_per_scoop*item.scoop_count), 2))
+                tax_count.append(item.calculate_tax(item.price_per_scoop*item.scoop_count))
+        print(tax_count)
         return tax_count
         
 def main():
@@ -159,7 +147,7 @@ def main():
     order.add(cookie_two)
 
     order.order_cost(order.items)
-    
+    order.order_tax(order.items)
     # tax_subttotal = order.order_tax(order.items)
     # subtotal_sum = round(sum(order_subtotal), 2)
     # tax_sum = sum(tax_subttotal)
