@@ -173,8 +173,13 @@ def test_tax_attribute():
 
 def test_calculate_cost():
     candy = Candy()
-    assert candy.calculate_cost(candy.candy_weight, candy.price_per_pound) == 4.17
+    assert candy.calculate_cost(candy.candy_weight, candy.price_per_pound) == 3.75
     cookie = Cookie()
-    assert cookie.calculate_cost(cookie.price_per_dozen) == 3.5
+    assert round(cookie.calculate_cost(cookie.price_per_dozen, cookie.cookie_quantity), 2) == 1.46
     ice_cream = IceCream()
-    assert ice_cream.calculate_cost()
+    assert ice_cream.calculate_cost(ice_cream.price_per_scoop, ice_cream.scoop_count) == 7
+    sundae = Sundae()
+    assert sundae.calculate_cost(sundae.scoop_count, sundae.price_per_scoop, sundae.topping_price) == 9.5
+
+def test_calculate_tax():
+    candy = Candy()

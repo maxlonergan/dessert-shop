@@ -67,10 +67,8 @@ class Sundae(IceCream):
         self.topping_price = topping_price
     def calculate_cost(self, scoops, scoop_price, topping_price):
         sub_total = (scoops * scoop_price) + topping_price
-        # tax = super().calculate_tax(sub_total)
-        total = round(sub_total, 2)
+        total = sub_total
         return total
-        
 
 class Order():
     '''
@@ -130,7 +128,7 @@ class Order():
                 tax_count.append(item.calculate_tax(cost))
         print(tax_count)
         return tax_count
-        
+  
 def main():
     '''
     adds some items to the order class
@@ -162,18 +160,13 @@ def main():
     i = 0
     for item in order.items:
         # print(f'{item.name}:      ${round(order_subtotal[i], 2)}    [Tax: ${round(tax_subttotal[i], 2)}]')
-        print('{}    ${}    [Tax: ${}]'.format(item.name, round(order_subtotal[i], 2), round(tax_subttotal[i], 2)))
+        print('{:<30} ${:<5} [Tax: ${}]'.format((item.name + ':'), round(order_subtotal[i], 2), round(tax_subttotal[i], 2)))
         i += 1
-    print(f'Order Subtotals:   ${subtotal_sum}    [Tax: ${tax_sum}]')
-    print(f'Order total:   ${final_total}')
-    print(f'Total number of items in order: {order.item_count()}')
-
-
-    
-
+    print('------------------------------------------------------')
+    print('Order Subtotals:               ${}  [Tax: ${}]'.format(subtotal_sum, tax_sum))
+    print('Order total:                   ${}'.format(final_total))
+    print('Total number of items in order: {}'.format(order.item_count()))
 
 main()
-
-
 
 
