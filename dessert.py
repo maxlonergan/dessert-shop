@@ -117,13 +117,17 @@ class Order():
         tax_count = []
         for item in item_list:
             if isinstance(item, Candy) == True:
-                tax_count.append(item.calculate_tax(item.price_per_pound))
+                cost = item.calculate_cost(item.price_per_pound, item.candy_weight)
+                tax_count.append(item.calculate_tax(cost))
             elif isinstance(item, Cookie) == True:
-                tax_count.append(item.calculate_tax(item.price_per_dozen))
+                cost = item.calculate_cost(item.price_per_dozen, item.cookie_quantity)
+                tax_count.append(item.calculate_tax(cost))
             elif isinstance(item, Sundae) == True:
-                tax_count.append(item.calculate_tax(item.price_per_scoop*item.scoop_count+item.topping_price))
+                cost = item.calculate_cost(item.price_per_scoop, item.scoop_count, item.topping_price)
+                tax_count.append(item.calculate_tax(cost))
             elif isinstance(item, IceCream) == True:
-                tax_count.append(item.calculate_tax(item.price_per_scoop*item.scoop_count))
+                cost = item.calculate_cost(item.price_per_scoop, item.scoop_count)
+                tax_count.append(item.calculate_tax(cost))
         print(tax_count)
         return tax_count
         
@@ -146,22 +150,23 @@ def main():
     order.add(sundae)
     order.add(cookie_two)
 
-    order.order_cost(order.items)
-    order.order_tax(order.items)
-    # tax_subttotal = order.order_tax(order.items)
-    # subtotal_sum = round(sum(order_subtotal), 2)
-    # tax_sum = sum(tax_subttotal)
+    # order.order_cost(order.items)
+    # order.order_tax(order.items)
+    order_subtotal = order.order_cost(order.items)
+    tax_subttotal = order.order_tax(order.items)
+    subtotal_sum = round(sum(order_subtotal), 2)
+    tax_sum = round(sum(tax_subttotal), 2)
     
-    # final_total = subtotal_sum + tax_sum
+    final_total = round(subtotal_sum + tax_sum, 2)
 
-    # i = 0
-
-    # for item in order.items:
-    #     print(f'{item.name}:      ${order_subtotal[i]}    [Tax: ${tax_subttotal[i]}]')
-    #     i += 1
-    # print(f'Order Subtotals:   ${subtotal_sum}    [Tax: ${tax_sum}]')
-    # print(f'Order total:   ${final_total}')
-    # print(f'Total number of items in order: {order.item_count()}')
+    i = 0
+    for item in order.items:
+        # print(f'{item.name}:      ${round(order_subtotal[i], 2)}    [Tax: ${round(tax_subttotal[i], 2)}]')
+        print('{}    ${}    [Tax: ${}]'.format(item.name, round(order_subtotal[i], 2), round(tax_subttotal[i], 2)))
+        i += 1
+    print(f'Order Subtotals:   ${subtotal_sum}    [Tax: ${tax_sum}]')
+    print(f'Order total:   ${final_total}')
+    print(f'Total number of items in order: {order.item_count()}')
 
 
     
