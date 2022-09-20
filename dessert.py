@@ -97,18 +97,28 @@ class Order():
         should probably rework to be closer to order_tax
         '''
         count = []
-        candy = item_list[0]
-        candy_two = item_list[1]
-        cookie = item_list[2]
-        ice_cream = item_list[3]
-        sundae = item_list[4]
-        cookie_two = item_list[5]
-        count.append(candy.calculate_cost(candy.price_per_pound, candy.candy_weight))
-        count.append(candy_two.calculate_cost(candy_two.price_per_pound, candy.candy_weight))
-        count.append(cookie.calculate_cost(cookie.price_per_dozen))
-        count.append(ice_cream.calculate_cost(ice_cream.price_per_scoop, ice_cream.scoop_count))
-        count.append(sundae.calculate_cost(sundae.scoop_count, sundae.price_per_scoop, sundae.topping_price))
-        count.append(cookie_two.calculate_cost(cookie_two.price_per_dozen))
+        for item in item_list:
+            if isinstance(item, Candy) == True:
+                print('it works')
+            elif isinstance(item, Cookie) == True:
+                print('cooookies')
+            elif isinstance(item, Sundae) == True:
+                print('sundaes rock')
+            elif isinstance(item, IceCream) == True:
+                print('I scream for ice cream')
+
+        # candy = item_list[0]
+        # candy_two = item_list[1]
+        # cookie = item_list[2]
+        # ice_cream = item_list[3]
+        # sundae = item_list[4]
+        # cookie_two = item_list[5]
+        # count.append(candy.calculate_cost(candy.price_per_pound, candy.candy_weight))
+        # count.append(candy_two.calculate_cost(candy_two.price_per_pound, candy.candy_weight))
+        # count.append(cookie.calculate_cost(cookie.price_per_dozen))
+        # count.append(ice_cream.calculate_cost(ice_cream.price_per_scoop, ice_cream.scoop_count))
+        # count.append(sundae.calculate_cost(sundae.scoop_count, sundae.price_per_scoop, sundae.topping_price))
+        # count.append(cookie_two.calculate_cost(cookie_two.price_per_dozen))
 
         total = count
         return total
@@ -148,37 +158,29 @@ def main():
     order.add(sundae)
     order.add(cookie_two)
 
-    order_subtotal = order.order_cost(order.items)
-    tax_subttotal = order.order_tax(order.items)
-    subtotal_sum = round(sum(order_subtotal), 2)
-    tax_sum = sum(tax_subttotal)
+    order.order_cost(order.items)
     
-    final_total = subtotal_sum + tax_sum
+    # tax_subttotal = order.order_tax(order.items)
+    # subtotal_sum = round(sum(order_subtotal), 2)
+    # tax_sum = sum(tax_subttotal)
+    
+    # final_total = subtotal_sum + tax_sum
 
-    i = 0
+    # i = 0
 
-    for item in order.items:
-        print(f'{item.name}:      ${order_subtotal[i]}    [Tax: ${tax_subttotal[i]}]')
-        i += 1
-    print(f'Order Subtotals:   ${subtotal_sum}    [Tax: ${tax_sum}]')
-    print(f'Order total:   ${final_total}')
-    print(f'Total number of items in order: {order.item_count()}')
+    # for item in order.items:
+    #     print(f'{item.name}:      ${order_subtotal[i]}    [Tax: ${tax_subttotal[i]}]')
+    #     i += 1
+    # print(f'Order Subtotals:   ${subtotal_sum}    [Tax: ${tax_sum}]')
+    # print(f'Order total:   ${final_total}')
+    # print(f'Total number of items in order: {order.item_count()}')
 
 
     
 
 
-# main()
+main()
 
-candy = Candy('Candy Corn', 1.5, .25)
-candy_two = Candy('Gummy Bears', .25, .35)
-cookie = Cookie('Chocolate Chip', 6, 3.99)
-ice_cream = IceCream('Pistachio', 2, .79)
-sundae = Sundae('Vanilla', 3, .69, 'Hot Fudge', 1.29)
-cookie_two = Cookie('Oatmeal Raisin', 2, 3.45)
-print(ice_cream.calculate_cost(ice_cream.price_per_scoop, ice_cream.scoop_count))
-print(sundae.calculate_cost(sundae.scoop_count, sundae.price_per_scoop, sundae.topping_price))
-print(cookie_two.calculate_cost(cookie_two.price_per_dozen, cookie_two.cookie_quantity))
 
 
 
