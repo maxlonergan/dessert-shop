@@ -29,7 +29,6 @@ class Candy(DessertItem):
         self.candy_weight = candy_weight
         self.price_per_pound = price_per_pound
     def calculate_cost(self, price, weight):
-        # actual_price = price / weight
         return price * weight
         
 class Cookie(DessertItem):
@@ -40,10 +39,11 @@ class Cookie(DessertItem):
         super().__init__(name)
         self.cookie_quantity = cookie_quantity
         self.price_per_dozen = price_per_dozen
-    def calculate_cost(self, price):
+    def calculate_cost(self, price, amount):
         # tax = super().calculate_tax(price)
-        total = round(price, 2)
-        return total
+        ratio = price / 12
+        return ratio * amount
+
 
 class IceCream(DessertItem):
     '''
@@ -174,8 +174,10 @@ def main():
 
 candy = Candy('Candy Corn', 1.5, .25)
 candy_two = Candy('Gummy Bears', .25, .35)
+cookie = Cookie('Chocolate Chip', 6, 3.99)
 print(candy.calculate_cost(candy.price_per_pound, candy.candy_weight))
 print(candy_two.calculate_cost(candy_two.price_per_pound, candy_two.candy_weight))
+print(cookie.calculate_cost(cookie.price_per_dozen, cookie.cookie_quantity))
 
 
 
