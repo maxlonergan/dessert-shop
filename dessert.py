@@ -1,6 +1,5 @@
 '''
-9/11/22 part one of the dessert shop
-lay out all the classes with test cases in test_dessert.py
+if running from the terminal type python3 dessertshop.py
 '''
 from abc import ABC
 
@@ -104,7 +103,6 @@ class Order():
                 count.append(item.calculate_cost(item.scoop_count, item.price_per_scoop, item.topping_price))
             elif isinstance(item, IceCream) == True:
                 count.append(item.calculate_cost(item.price_per_scoop, item.scoop_count))
-        print(count)
         return count
         
     
@@ -126,7 +124,6 @@ class Order():
             elif isinstance(item, IceCream) == True:
                 cost = item.calculate_cost(item.price_per_scoop, item.scoop_count)
                 tax_count.append(item.calculate_tax(cost))
-        print(tax_count)
         return tax_count
   
 def main():

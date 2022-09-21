@@ -66,7 +66,7 @@ def test_alternate():
     assert sundae.topping_name == 'chocolate'
     assert sundae.topping_price == 4.0
 
-# tests conducted under this comment block should be following this guide
+# tests with _modify_ should be following this guide
 # 1. Call the constructor with default values
 # 2. Modify an attribute
 # 3. Test the attribute to see that it has its new value
@@ -172,6 +172,9 @@ def test_tax_attribute():
     assert candy.tax_percent == 7.25
 
 def test_calculate_cost():
+    '''
+    tests the method calculate_cost()
+    '''
     candy = Candy()
     assert candy.calculate_cost(candy.candy_weight, candy.price_per_pound) == 3.75
     cookie = Cookie()
@@ -182,4 +185,22 @@ def test_calculate_cost():
     assert sundae.calculate_cost(sundae.scoop_count, sundae.price_per_scoop, sundae.topping_price) == 9.5
 
 def test_calculate_tax():
+    '''
+    tests the method calculate_tax()
+    '''
     candy = Candy()
+    candy_cost = candy.calculate_cost(candy.candy_weight, candy.price_per_pound)
+    candy_tax = candy.calculate_tax(candy_cost)
+    assert candy.calculate_tax(candy_cost) == candy_tax
+    cookie = Cookie()
+    cookie_cost = cookie.calculate_cost(cookie.price_per_dozen, cookie.cookie_quantity)
+    cookie_tax = cookie.calculate_tax(cookie.calculate_cost(cookie.price_per_dozen, cookie.cookie_quantity))
+    assert cookie.calculate_tax(cookie_cost) == cookie_tax
+    ice_cream = IceCream()
+    ice_cream_cost = ice_cream.calculate_cost(ice_cream.price_per_scoop, ice_cream.scoop_count)
+    ice_cream_tax = ice_cream.calculate_tax(ice_cream.calculate_cost(ice_cream.price_per_scoop, ice_cream.scoop_count))
+    assert ice_cream.calculate_tax(ice_cream_cost) == ice_cream_tax
+    sundae = Sundae()
+    sundae_cost = sundae.calculate_cost(sundae.scoop_count, sundae.price_per_scoop, sundae.topping_price)
+    sundae_tax = sundae.calculate_tax(sundae.calculate_cost(sundae.scoop_count, sundae.price_per_scoop, sundae.topping_price))
+    assert sundae.calculate_tax(sundae_cost) == sundae_tax
