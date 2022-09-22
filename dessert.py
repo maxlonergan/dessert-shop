@@ -164,13 +164,14 @@ def main():
     print('Order total:                   ${}'.format(final_total))
     print('Total number of items in order: {}'.format(order.item_count()))
 
-def validate_float(input):
+def validate_float(user_input):
     '''
     validates input and if correct returns the input as a float
     '''
     while True:
         try:
-            flo = float(input)
+            flo = float(user_input)
+            yield flo
         except ValueError:
             print('input must be a decimal like such: 1.0, 2.7, 0.78')
             continue
@@ -188,6 +189,7 @@ Which would you like to add to the order? (1-4, Enter for done):
     print(menu)
     item = input()
     if item == '1':
+        # add code below to user_prompt_candy and instead call user_prompt_candy()
         print('Enter type of candy:')
         candy_type = input()
 
@@ -212,8 +214,9 @@ Which would you like to add to the order? (1-4, Enter for done):
                 break
 
     elif item == '2':
-        print('Enter type of Cookie')
-        cookie_order = input()
+        user_prompt_cookie()
+        # print('Enter type of Cookie')
+        # cookie_order = input()
     elif item == '3':
         print('gross....ice cream')
     elif item =='4':
@@ -225,7 +228,12 @@ def user_prompt_candy():
     pass
 
 def user_prompt_cookie():
-    pass
+    print('Enter type of Cookie:')
+    cookie_order = input()
+    print('Enter quantity purchased:')
+    cookie_number = input()
+    print('Enter the price per dozen:')
+    cookie_price = input()
 
 def user_prompt_icecream():
     pass
@@ -233,10 +241,8 @@ def user_prompt_icecream():
 def user_prompt_sundae():
     pass
 
-
-
 # main()
-
-main_menu()
+# main_menu()
+validate_float('test')
 
 
