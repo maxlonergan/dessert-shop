@@ -131,23 +131,13 @@ def main():
     '''
     adds some items to the order class
     '''
+    customer_order = main_menu()
+
     order = Order()
-    candy_one = Candy('Candy Corn', 1.5, .25)
-    candy_two = Candy('Gummy Bears', .25, .35)
-    cookie = Cookie('Chocolate Chip', 6, 3.99)
-    ice_cream = IceCream('Pistachio', 2, .79)
-    sundae = Sundae('Vanilla', 3, .69, 'Hot Fudge', 1.29)
-    cookie_two = Cookie('Oatmeal Raisin', 2, 3.45)
+    order.add(customer_order)
 
-    order.add(candy_one)
-    order.add(candy_two)
-    order.add(cookie)
-    order.add(ice_cream)
-    order.add(sundae)
-    order.add(cookie_two)
+    order.items = order.items[0] # without this order.items is a list within a list
 
-    # order.order_cost(order.items)
-    # order.order_tax(order.items)
     order_subtotal = order.order_cost(order.items)
     tax_subttotal = order.order_tax(order.items)
     subtotal_sum = round(sum(order_subtotal), 2)
@@ -157,7 +147,6 @@ def main():
 
     i = 0
     for item in order.items:
-        # print(f'{item.name}:      ${round(order_subtotal[i], 2)}    [Tax: ${round(tax_subttotal[i], 2)}]')
         print('{:<30} ${:<5} [Tax: ${}]'.format((item.name + ':'), round(order_subtotal[i], 2), round(tax_subttotal[i], 2)))
         i += 1
     print('------------------------------------------------------')
@@ -165,21 +154,10 @@ def main():
     print('Order total:                   ${}'.format(final_total))
     print('Total number of items in order: {}'.format(order.item_count()))
 
-def validate_float(user_input):
-    '''
-    validates input and if correct returns the input as a float
-    '''
-    while True:
-        try:
-            flo = float(user_input)
-        except ValueError:
-            print('input must be a decimal like such: 1.0, 2.7, 0.78')
-            continue
-        else:
-            yield flo
-            break
-
 def main_menu():
+    '''
+    controls the main menu console interface
+    '''
     menu = '''
 1. Candy
 2. Cookie
@@ -200,11 +178,12 @@ Which would you like to add to the order? (1-4, Enter for done):
         elif item =='4':
             order.append(user_prompt_sundae())
         else:
-            print('All done')
-            print(order)
-            break
+            return order
         
 def user_prompt_candy():
+    '''
+    controls the candy submenu
+    '''
     print('Enter type of candy:')
     candy_type = input()
 
@@ -231,6 +210,9 @@ def user_prompt_candy():
     return candy_order
 
 def user_prompt_cookie():
+    '''
+    controls the cookie submenu
+    '''
     print('Enter type of Cookie:')
     cookie_type = input()
 
@@ -257,6 +239,9 @@ def user_prompt_cookie():
     return cookie_order
 
 def user_prompt_icecream():
+    '''
+    controls the ice cream submenu
+    '''
     print('Enter type of ice cream:')
     icecream_name = input()
 
@@ -283,6 +268,9 @@ def user_prompt_icecream():
     return icecream_order
 
 def user_prompt_sundae():
+    '''
+    controls the sundae submenu
+    '''
     print('Enter type of ice cream:')
     icecream_name = input()
     
@@ -320,9 +308,5 @@ def user_prompt_sundae():
     sundae_order = Sundae(icecream_name, scoop_number, scoop_price, topping_name, topping_price)
     return sundae_order
 
-# main()
-main_menu()
 
-# validate_float(0.5)
-
-
+main()
