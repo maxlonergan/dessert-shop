@@ -2,6 +2,7 @@
 if running from the terminal type python3 dessertshop.py
 '''
 from abc import ABC
+from multiprocessing.sharedctypes import Value
 
 class DessertItem(ABC):
     '''
@@ -171,11 +172,11 @@ def validate_float(user_input):
     while True:
         try:
             flo = float(user_input)
-            yield flo
         except ValueError:
             print('input must be a decimal like such: 1.0, 2.7, 0.78')
             continue
         else:
+            yield flo
             break
 
 def main_menu():
@@ -186,63 +187,142 @@ def main_menu():
 4. Sundae
 Which would you like to add to the order? (1-4, Enter for done): 
         '''
-    print(menu)
-    item = input()
-    if item == '1':
-        # add code below to user_prompt_candy and instead call user_prompt_candy()
-        print('Enter type of candy:')
-        candy_type = input()
-
-        print('Enter weight of candy:')
-        while True:
-            try:
-                candy_weight = float(input())
-            except ValueError:
-                print('input must be a decimal like such: 1.0, 2.7, 0.78')
-                continue
-            else:
-                break
-
-        print('Enter the price per pound:')
-        while True:
-            try:
-                candy_price = float(input())
-            except ValueError:
-                print('input must be a decimal like such: 1.0, 2.7, 0.78')
-                continue
-            else:
-                break
-
-    elif item == '2':
-        user_prompt_cookie()
-        # print('Enter type of Cookie')
-        # cookie_order = input()
-    elif item == '3':
-        print('gross....ice cream')
-    elif item =='4':
-        print('sundaeeeeeee')
-    else:
-        print('pick one of the options dammit')
-
+    order = []
+    while True:
+        print(menu)
+        item = input()
+        if item == '1':
+            order.append(user_prompt_candy())
+        elif item == '2':
+            order.append(user_prompt_cookie())
+        elif item == '3':
+            order.append(user_prompt_icecream())
+        elif item =='4':
+            order.append(user_prompt_sundae())
+        else:
+            print('All done')
+            print(order)
+            break
+        
 def user_prompt_candy():
-    pass
+    print('Enter type of candy:')
+    candy_type = input()
+
+    print('Enter weight of candy:')
+    while True:
+        try:
+            candy_weight = float(input())
+        except ValueError:
+            print('input must be a decimal like such: 1.0, 2.7, 0.78')
+            continue
+        else:
+            break
+
+    print('Enter the price per pound:')
+    while True:
+        try:
+            candy_price = float(input())
+        except ValueError:
+            print('input must be a decimal like such: 1.0, 2.7, 0.78')
+            continue
+        else:
+            break
+    candy_order = Candy(candy_type, candy_weight, candy_price)
+    return candy_order
 
 def user_prompt_cookie():
     print('Enter type of Cookie:')
-    cookie_order = input()
+    cookie_type = input()
+
     print('Enter quantity purchased:')
-    cookie_number = input()
+    while True:
+        try:
+            cookie_number = int(input())
+        except ValueError:
+            print('Amount must be a whole number')
+            continue
+        else:
+            break
+
     print('Enter the price per dozen:')
-    cookie_price = input()
+    while True:
+        try:
+            cookie_price = float(input())
+        except ValueError:
+            print('Input must be a decimal')
+            continue
+        else:
+            break
+    cookie_order = Cookie(cookie_type, cookie_number, cookie_price)
+    return cookie_order
 
 def user_prompt_icecream():
-    pass
+    print('Enter type of ice cream:')
+    icecream_name = input()
+
+    print('Enter the number of scoops')
+    while True:
+        try:
+            scoop_number = int(input())
+        except ValueError:
+            print('input must be a whole number')
+            continue
+        else:
+            break
+
+    print('Enter ice cream price')
+    while True:
+        try:
+            scoop_price = float(input())
+        except ValueError:
+            print('input must be a decimal')
+            continue
+        else:
+            break
+    icecream_order = IceCream(icecream_name, scoop_price, scoop_number)
+    return icecream_order
 
 def user_prompt_sundae():
-    pass
+    print('Enter type of ice cream:')
+    icecream_name = input()
+    
+    print('Enter number of scoops')
+    while True:
+        try:
+            scoop_number = int(input())
+        except ValueError:
+            print('input must be a whole number')
+            continue
+        else:
+            break
+    print('Enter price per scoop')
+    while True:
+        try:
+            scoop_price = float(input())
+        except ValueError:
+            print('input must be a decimal')
+            continue
+        else:
+            break
+
+    print('Enter topping name:')
+    topping_name = input()
+
+    print('Enter topping price:')
+    while True:
+        try:
+            topping_price = float(input())
+        except ValueError:
+            print('input must be a decimal')
+            continue
+        else:
+            break
+    sundae_order = Sundae(icecream_name, scoop_number, scoop_price, topping_name, topping_price)
+    return sundae_order
 
 # main()
-# main_menu()
-validate_float('test')
+main_menu()
+
+# validate_float(0.5)
 
 
