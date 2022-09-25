@@ -38,9 +38,7 @@ class Candy(DessertItem):
      {self.candy_weight} @ ${self.price_per_pound}/lb: ${round(cost, 2)}               [Tax: ${round(tax, 2)}]
         '''
         return receipt
-
-        
-        
+     
 class Cookie(DessertItem):
     '''
     cookie class
@@ -82,6 +80,7 @@ class IceCream(DessertItem):
      {self.scoop_count} @ ${self.price_per_scoop}/scoop: ${round(cost, 2)}              [Tax: ${round(tax, 2)}]
         '''
         return receipt
+
 class Sundae(IceCream):
     '''
     sundae class
@@ -100,9 +99,10 @@ class Sundae(IceCream):
         reciept = f'''
 {self.topping_name} {self.name} sundae
      {self.scoop_count} @ ${self.price_per_scoop}/scoop
-     {self.topping_name} topping @ ${self.topping_price}: ${round(cost, 2)}                [Tax: ${round(tax, 2)}]
+     {self.topping_name} topping @ ${self.topping_price}: ${round(cost, 2)}          [Tax: ${round(tax, 2)}]
         '''
         return reciept
+
 class Order():
     '''
     order class
@@ -169,7 +169,7 @@ def main():
     order = Order()
     order.add(customer_order)
 
-    order = order.items[0] # without this order.items is a list within a list
+    order.items = order.items[0] # without this order.items is a list within a list
 
     order_subtotal = order.order_cost(order.items)
     tax_subttotal = order.order_tax(order.items)
@@ -178,11 +178,8 @@ def main():
     
     final_total = round(subtotal_sum + tax_sum, 2)
 
-    # i = 0
-    # for item in order.items:
-    #     print('{:<30} ${:<5} [Tax: ${}]'.format((item.name + ':'), round(order_subtotal[i], 2), round(tax_subttotal[i], 2)))
-    #     i += 1
-    print(order)
+    for item in order.items:
+        print(item)
     print('------------------------------------------------------')
     print('Order Subtotals:               ${}  [Tax: ${}]'.format(subtotal_sum, tax_sum))
     print('Order total:                   ${}'.format(final_total))
@@ -343,7 +340,7 @@ def user_prompt_sundae():
     sundae_order = Sundae(icecream_name, scoop_number, scoop_price, topping_name, topping_price)
     return sundae_order
 
-def main_part_two():
+
     order = Order()
     order.add(Candy('Candy Corn', 1.5, .25))
     order.add(Candy('Gummy Bears', .25, .35))
@@ -357,16 +354,4 @@ def main_part_two():
     print(f'Total number of items in order: d{order.item_count()}')
 
 main()
-# main_part_two()
 
-# cookie = Cookie('Chocolate chip')
-# candy = Candy('Gummy bears')
-# icecream = IceCream('Vanilla')
-# sundae = Sundae('Mint Chocolate Chip', 5, 1.69, 'Sprinkles', 2.5)
-# order = Order()
-# order.add(candy)
-# order.add(cookie)
-# order.add(icecream)
-# order.add(sundae)
-# for item in order.items:
-#     print(item)
