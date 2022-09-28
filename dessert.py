@@ -3,6 +3,7 @@ if running from the terminal type python3 dessertshop.py
 '''
 from abc import ABC
 from multiprocessing.sharedctypes import Value
+from packaging import Packaging
 
 class DessertItem(ABC):
     '''
@@ -20,7 +21,7 @@ class DessertItem(ABC):
         actual_tax = cost * tax
         return actual_tax
 
-class Candy(DessertItem):
+class Candy(DessertItem, Packaging):
     '''
     candy class
     '''
@@ -38,7 +39,13 @@ class Candy(DessertItem):
      {self.candy_weight} @ ${self.price_per_pound}/lb: ${round(cost, 2)}               [Tax: ${round(tax, 2)}]
         '''
         return receipt
-     
+    def get_packaging(self):
+        return self.package_type
+    def set_packaging(self, package):
+        self.package_type = package
+
+
+
 class Cookie(DessertItem):
     '''
     cookie class
@@ -353,5 +360,7 @@ def user_prompt_sundae():
         print(item.name)
     print(f'Total number of items in order: d{order.item_count()}')
 
-main()
-
+# main()
+candy = Candy()
+candy.set_packaging('bag')
+print(candy.get_packaging())
