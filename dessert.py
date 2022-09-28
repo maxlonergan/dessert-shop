@@ -2,10 +2,9 @@
 if running from the terminal type python3 dessertshop.py
 '''
 from abc import ABC
-from multiprocessing.sharedctypes import Value
 from packaging import Packaging
 
-class DessertItem(ABC):
+class DessertItem(Packaging, ABC):
     '''
     Dessert super class, all classes will extend from here
     The default name attribute should be an empty string
@@ -20,8 +19,18 @@ class DessertItem(ABC):
         tax = .0725
         actual_tax = cost * tax
         return actual_tax
+    def get_packaging(self):
+        '''
+        returns what is used to package the item
+        '''
+        return self.package_type
+    def set_packaging(self, package):
+        '''
+        sets what should be used to package the item
+        '''
+        self.package_type = package
 
-class Candy(DessertItem, Packaging):
+class Candy(DessertItem):
     '''
     candy class
     '''
@@ -39,10 +48,7 @@ class Candy(DessertItem, Packaging):
      {self.candy_weight} @ ${self.price_per_pound}/lb: ${round(cost, 2)}               [Tax: ${round(tax, 2)}]
         '''
         return receipt
-    def get_packaging(self):
-        return self.package_type
-    def set_packaging(self, package):
-        self.package_type = package
+
 
 
 
@@ -360,7 +366,7 @@ def user_prompt_sundae():
         print(item.name)
     print(f'Total number of items in order: d{order.item_count()}')
 
-# main()
-candy = Candy()
-candy.set_packaging('bag')
-print(candy.get_packaging())
+main()
+# candy = Candy('Gummy Bears')
+# candy.set_packaging('bag')
+# print(candy.get_packaging())
