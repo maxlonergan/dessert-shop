@@ -105,6 +105,7 @@ class IceCream(DessertItem):
 class Sundae(IceCream):
     '''
     sundae class
+    constructor (name, scoop_count, price_per_scoop, topping_name, topping_price)
     '''
     def __init__(self, name='', scoop_count=4, price_per_scoop=1.75, topping_name='sprinkles', topping_price=2.5):
         super().__init__(name, price_per_scoop, scoop_count)
