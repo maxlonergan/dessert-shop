@@ -57,6 +57,7 @@ class Candy(DessertItem):
 class Cookie(DessertItem):
     '''
     cookie class
+    constructor (name, cookie_quantity, price_per_dozen)
     '''
     def __init__(self, name='', cookie_quantity=5, price_per_dozen=3.5):
         super().__init__(name)
