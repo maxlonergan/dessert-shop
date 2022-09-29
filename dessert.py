@@ -177,7 +177,7 @@ class Order():
                 cost = item.calculate_cost(item.price_per_scoop, item.scoop_count)
                 tax_count.append(item.calculate_tax(cost))
         return tax_count
-  
+
 def main():
     '''
     adds some items to the order class
@@ -203,7 +203,6 @@ def main():
     print('Order total:                   ${}'.format(final_total))
     print('Total number of items in order: {}'.format(order.item_count()))
     print('------------------------------------------------------')
-
 
 def main_menu():
     '''
@@ -373,12 +372,12 @@ def user_prompt_sundae():
         print(item.name)
     print(f'Total number of items in order: d{order.item_count()}')
 
-# main()
-candy = Candy('Gummy Bears')
-cookie = Cookie('Chocolate Chip')
-icecream = IceCream('Vanilla')
-sundae = Sundae()
-print(issubclass(Cookie, Packaging))
+main()
+# candy = Candy('Gummy Bears')
+# cookie = Cookie('Chocolate Chip')
+# icecream = IceCream('Vanilla')
+# sundae = Sundae()
+# print(issubclass(Candy, Packaging))
 # print(cookie)
 # print(icecream)
 # print(sundae)
