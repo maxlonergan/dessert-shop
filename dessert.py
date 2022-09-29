@@ -81,6 +81,7 @@ class Cookie(DessertItem):
 class IceCream(DessertItem):
     '''
     ice cream class
+    constructor (name, price_per_scoop, scoop_count)
     '''
     def __init__(self, name='', price_per_scoop=1.75, scoop_count=4):
         super().__init__(name)
