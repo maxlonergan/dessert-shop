@@ -65,10 +65,11 @@ class Cookie(DessertItem):
         ratio = price / 12
         return ratio * amount
     def __str__(self):
+        package = super().get_packaging()
         cost = self.calculate_cost(self.price_per_dozen, self.cookie_quantity)
         tax = round(self.calculate_tax(cost), 2)
         receipt = f'''
-{self.name}
+{self.name}  ({package})
      {self.cookie_quantity} @ ${self.price_per_dozen} dozen: ${round(cost, 2)}              [Tax: ${round(tax, 2)}]
         '''
         return receipt
@@ -79,6 +80,7 @@ class IceCream(DessertItem):
     '''
     def __init__(self, name='', price_per_scoop=1.75, scoop_count=4):
         super().__init__(name)
+        super().set_packaging('Bowl')
         self.scoop_count = scoop_count
         self.price_per_scoop = price_per_scoop
     def calculate_cost(self, price, scoops):
@@ -86,10 +88,11 @@ class IceCream(DessertItem):
         total = sub_total
         return total
     def __str__(self):
+        package = super().get_packaging()
         cost = self.calculate_cost(self.price_per_scoop, self.scoop_count)
         tax = self.calculate_tax(cost)
         receipt = f'''
-{self.name}
+{self.name}  ({package})
      {self.scoop_count} @ ${self.price_per_scoop}/scoop: ${round(cost, 2)}              [Tax: ${round(tax, 2)}]
         '''
         return receipt
@@ -100,6 +103,7 @@ class Sundae(IceCream):
     '''
     def __init__(self, name='', scoop_count=4, price_per_scoop=1.75, topping_name='sprinkles', topping_price=2.5):
         super().__init__(name, price_per_scoop, scoop_count)
+        super().set_packaging('Boat')
         self.topping_name = topping_name
         self.topping_price = topping_price
     def calculate_cost(self, scoops, scoop_price, topping_price):
@@ -107,10 +111,11 @@ class Sundae(IceCream):
         total = sub_total
         return total
     def __str__(self):
+        package = super().get_packaging()
         cost = self.calculate_cost(self.scoop_count, self.price_per_scoop, self.topping_price)
         tax = self.calculate_tax(cost)
         reciept = f'''
-{self.topping_name} {self.name} sundae
+{self.topping_name} {self.name} sundae  ({package})
      {self.scoop_count} @ ${self.price_per_scoop}/scoop
      {self.topping_name} topping @ ${self.topping_price}: ${round(cost, 2)}          [Tax: ${round(tax, 2)}]
         '''
@@ -369,5 +374,9 @@ def user_prompt_sundae():
 # main()
 candy = Candy('Gummy Bears')
 cookie = Cookie('Chocolate Chip')
+icecream = IceCream('Vanilla')
+sundae = Sundae()
 print(candy)
-print(cookie.get_packaging())
+print(cookie)
+print(icecream)
+print(sundae)

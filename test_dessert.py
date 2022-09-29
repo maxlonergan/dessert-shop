@@ -7,6 +7,7 @@ to test type: python3 -m pytest test_dessert.py into the terminal
 # isinstance() can be set to check if a variable is a certain data type like int or str
 
 from dessert import *
+from packaging import Packaging
 
 # to test type: python3 -m pytest test_dessert.py into the terminal
 
@@ -75,7 +76,6 @@ def test_alternate():
 # 6. Modify an attribute
 # 7. Test the attribute to see that it has its new value
 # 8. Repeat steps 6 and 7 for each attribute
-
 
 def test_modify_candy():
     '''
@@ -204,3 +204,6 @@ def test_calculate_tax():
     sundae_cost = sundae.calculate_cost(sundae.scoop_count, sundae.price_per_scoop, sundae.topping_price)
     sundae_tax = sundae.calculate_tax(sundae.calculate_cost(sundae.scoop_count, sundae.price_per_scoop, sundae.topping_price))
     assert sundae.calculate_tax(sundae_cost) == sundae_tax
+
+def test_packaging():
+    pass
