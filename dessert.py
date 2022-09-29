@@ -35,6 +35,7 @@ class DessertItem(Packaging, ABC):
 class Candy(DessertItem):
     '''
     candy class
+    constructor (name, candy_weight, price_per_pound)
     '''
     def __init__(self, name='', candy_weight=1.50, price_per_pound=2.50):
         super().__init__(name)
