@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from tkinter import Pack
 
 
 class Packaging(ABC):
@@ -16,5 +17,10 @@ class Packaging(ABC):
     
     @classmethod
     def __subclasshook__(cls, C):
-        pass
+        if cls is Packaging:
+            if any('Get_packaging' in Candy.__dict__ for Candy in C.__mro__):
+                pass
+            return True
+        else:
+            return False
         

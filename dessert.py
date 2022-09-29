@@ -195,13 +195,15 @@ def main():
     tax_sum = round(sum(tax_subttotal), 2)
     
     final_total = round(subtotal_sum + tax_sum, 2)
-
+    print('----------------------Receipt-------------------------')
     for item in order.items:
         print(item)
     print('------------------------------------------------------')
     print('Order Subtotals:               ${}  [Tax: ${}]'.format(subtotal_sum, tax_sum))
     print('Order total:                   ${}'.format(final_total))
     print('Total number of items in order: {}'.format(order.item_count()))
+    print('------------------------------------------------------')
+
 
 def main_menu():
     '''
@@ -376,7 +378,7 @@ candy = Candy('Gummy Bears')
 cookie = Cookie('Chocolate Chip')
 icecream = IceCream('Vanilla')
 sundae = Sundae()
-print(candy)
-print(cookie)
-print(icecream)
-print(sundae)
+print(issubclass(Cookie, Packaging))
+# print(cookie)
+# print(icecream)
+# print(sundae)
