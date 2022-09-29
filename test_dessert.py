@@ -206,4 +206,5 @@ def test_calculate_tax():
     assert sundae.calculate_tax(sundae_cost) == sundae_tax
 
 def test_packaging():
-    pass
+    candy = Candy()
+    assert candy.get_packaging() == 'Bag'
