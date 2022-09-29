@@ -208,3 +208,5 @@ def test_calculate_tax():
 def test_packaging():
     candy = Candy()
     assert candy.get_packaging() == 'Bag'
+    cookie = Cookie()
+    assert cookie.get_packaging() == 'Box'
