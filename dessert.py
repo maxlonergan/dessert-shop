@@ -34,23 +34,22 @@ class Candy(DessertItem):
     '''
     candy class
     '''
-    def __init__(self, name='', candy_weight=1.5, price_per_pound=2.50):
+    def __init__(self, name='', candy_weight=1.50, price_per_pound=2.50):
         super().__init__(name)
+        super().set_packaging('Bag')
         self.candy_weight = candy_weight
         self.price_per_pound = price_per_pound
     def calculate_cost(self, price, weight):
         return price * weight
     def __str__(self):
+        package = super().get_packaging()
         cost = self.calculate_cost(self.price_per_pound, self.candy_weight)
         tax = round(self.calculate_tax(cost), 2)
         receipt = f'''
-{self.name}
+{self.name}  ({package})
      {self.candy_weight} @ ${self.price_per_pound}/lb: ${round(cost, 2)}               [Tax: ${round(tax, 2)}]
         '''
         return receipt
-
-
-
 
 class Cookie(DessertItem):
     '''
@@ -58,6 +57,7 @@ class Cookie(DessertItem):
     '''
     def __init__(self, name='', cookie_quantity=5, price_per_dozen=3.5):
         super().__init__(name)
+        super().set_packaging('Box')
         self.cookie_quantity = cookie_quantity
         self.price_per_dozen = price_per_dozen
     def calculate_cost(self, price, amount):
@@ -366,7 +366,8 @@ def user_prompt_sundae():
         print(item.name)
     print(f'Total number of items in order: d{order.item_count()}')
 
-main()
-# candy = Candy('Gummy Bears')
-# candy.set_packaging('bag')
-# print(candy.get_packaging())
+# main()
+candy = Candy('Gummy Bears')
+cookie = Cookie('Chocolate Chip')
+print(candy)
+print(cookie.get_packaging())

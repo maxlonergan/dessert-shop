@@ -15,6 +15,6 @@ class Packaging(ABC):
         self.package_type = package
     
     @classmethod
-    def __subclasshook__(cls, ):
+    def __subclasshook__(cls, C):
         pass
         
