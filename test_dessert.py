@@ -210,3 +210,7 @@ def test_packaging():
     assert candy.get_packaging() == 'Bag'
     cookie = Cookie()
     assert cookie.get_packaging() == 'Box'
+    icecream = IceCream()
+    assert icecream.get_packaging() == 'Bowl'
+    sundae = Sundae()
+    assert sundae.get_packaging() == 'Boat'
