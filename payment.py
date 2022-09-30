@@ -1,0 +1,3 @@
+'''
+Containts the Payment Class
+'''

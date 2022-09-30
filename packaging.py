@@ -7,7 +7,7 @@ from abc import ABC, abstractmethod
 
 class Packaging(ABC):
     '''
-    Packaging class 
+    Packaging class
     '''
     def __init__(self, package_type):
         self.package_type = package_type
