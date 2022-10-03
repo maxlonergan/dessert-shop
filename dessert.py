@@ -5,6 +5,7 @@ contained in packaging.py
 '''
 from abc import ABC
 from packaging import Packaging
+from payment import *
 
 class DessertItem(Packaging, ABC):
     '''
@@ -127,7 +128,7 @@ class Sundae(IceCream):
         '''
         return reciept
 
-class Order():
+class Order(Payment):
     '''
     order class
     '''    
@@ -183,3 +184,7 @@ class Order():
                 cost = item.calculate_cost(item.price_per_scoop, item.scoop_count)
                 tax_count.append(item.calculate_tax(cost))
         return tax_count
+    payment = Payment()
+
+    print(payment.pay_type)
+

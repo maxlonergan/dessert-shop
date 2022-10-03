@@ -10,9 +10,12 @@ class PayType(Enum):
     PHONE = 3
 
 class Payment(ABC):
-    def __init__(self, pay_type):
+    '''
+    payment class
+    '''
+    def __init__(self, pay_type=PayType(1).name):
         self._pay_type = pay_type
-    
+
     @property
     # @abstractmethod
     def pay_type(self):
@@ -20,13 +23,14 @@ class Payment(ABC):
 
     @pay_type.setter
     def pay_type(self, new_type):
-        if isinstance(new_type, int):
-            self._pay_type = new_type
+        # self._pay_type = new_type
+        if new_type == 1 or 2 or 3:
+            self._pay_type = PayType(new_type).name
         else:
             print('it dont work')
 
 
-payment = Payment(5)
-payment.pay_type = 3
+# payment = Payment(5)
+# payment.pay_type = 1
 
-print(payment.pay_type)
+# print(payment.pay_type)
