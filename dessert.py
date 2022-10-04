@@ -131,9 +131,10 @@ class Sundae(IceCream):
 class Order(Payment):
     '''
     order class
-    '''    
+    '''
     def __init__(self):
         self.items = DessertItem().order
+        self.pay_method = Payment().pay_type
 
     def add(self,item):
         '''
@@ -184,7 +185,22 @@ class Order(Payment):
                 cost = item.calculate_cost(item.price_per_scoop, item.scoop_count)
                 tax_count.append(item.calculate_tax(cost))
         return tax_count
-    payment = Payment()
 
-    print(payment.pay_type)
+    def payment_method(self, new_payment):
+        '''
+        returns the payment method
+        '''
+        payment = Payment()
+        payment.pay_type = new_payment
+        return payment.pay_type
+
+    def __str__(self):
+        order = Order()
+        payment = order.payment_method(1)
+        receipt = (f'Paid with {payment}')
+        return receipt
+
+test_order = Order()
+
+print(test_order)
 

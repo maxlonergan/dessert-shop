@@ -63,7 +63,7 @@ Which would you like to add to the order? (1-4, Enter for done):
             order.append(user_prompt_sundae())
         else:
             return order
-        
+
 def user_prompt_candy():
     '''
     controls the candy submenu
@@ -193,4 +193,28 @@ def user_prompt_sundae():
     sundae_order = Sundae(icecream_name, scoop_number, scoop_price, topping_name, topping_price)
     return sundae_order
 
-main()
+def payment_options():
+    payment_options = '''
+1. Cash
+2. Card
+3. Phone
+Enter payment method:
+    '''
+    payment_choice = 0
+    while True:
+        print(payment_options)
+        item = input()
+        if item == '1':
+            payment_choice = 1
+            return payment_choice
+        elif item == '2':
+            payment_choice = 2
+            return payment_choice
+        elif item == '3':
+            payment_choice = 3
+            return payment_choice
+
+
+# main()
+
+print(payment_options())
