@@ -17,7 +17,6 @@ def main():
     adds some items to the order class
     '''
     customer_order = main_menu()
-
     order = Order()
     order.add(customer_order)
 
@@ -29,6 +28,8 @@ def main():
     tax_sum = round(sum(tax_subttotal), 2)
     
     final_total = round(subtotal_sum + tax_sum, 2)
+    payment_choice = payment_options()
+
     print('----------------------Receipt-------------------------')
     for item in order.items:
         print(item)
@@ -37,7 +38,7 @@ def main():
     print('Order total:                   ${}'.format(final_total))
     print('Total number of items in order: {}'.format(order.item_count()))
     print('------------------------------------------------------')
-
+    print(order.payment_method(payment_choice))
 def main_menu():
     '''
     controls the main menu console interface
@@ -215,6 +216,6 @@ Enter payment method:
             return payment_choice
 
 
-# main()
+main()
 
-print(payment_options())
+# print(payment_options())

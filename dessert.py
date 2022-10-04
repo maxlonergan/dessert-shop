@@ -200,7 +200,3 @@ class Order(Payment):
         receipt = (f'Paid with {payment}')
         return receipt
 
-test_order = Order()
-
-print(test_order)
-
