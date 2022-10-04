@@ -28,7 +28,7 @@ def main():
     tax_sum = round(sum(tax_subttotal), 2)
     
     final_total = round(subtotal_sum + tax_sum, 2)
-    payment_choice = payment_options()
+    order.counter = payment_options()
 
     print('----------------------Receipt-------------------------')
     for item in order.items:
@@ -38,7 +38,8 @@ def main():
     print('Order total:                   ${}'.format(final_total))
     print('Total number of items in order: {}'.format(order.item_count()))
     print('------------------------------------------------------')
-    print(order.payment_method(payment_choice))
+    print(order)
+
 def main_menu():
     '''
     controls the main menu console interface

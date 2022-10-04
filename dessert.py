@@ -4,6 +4,7 @@ This module contains the dessert class heirarchy except for the classes
 contained in packaging.py
 '''
 from abc import ABC
+from cgi import test
 from packaging import Packaging
 from payment import *
 
@@ -132,9 +133,11 @@ class Order(Payment):
     '''
     order class
     '''
+
     def __init__(self):
         self.items = DessertItem().order
         self.pay_method = Payment().pay_type
+        self.counter = 1
 
     def add(self,item):
         '''
@@ -196,7 +199,7 @@ class Order(Payment):
 
     def __str__(self):
         order = Order()
-        payment = order.payment_method(1)
+        payment = order.payment_method(self.counter)
         receipt = (f'Paid with {payment}')
         return receipt
 
