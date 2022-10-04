@@ -202,4 +202,3 @@ class Order(Payment):
         payment = order.payment_method(self.counter)
         receipt = (f'Paid with {payment}')
         return receipt
-

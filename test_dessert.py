@@ -8,6 +8,7 @@ to test type: python3 -m pytest test_dessert.py into the terminal
 
 from dessert import *
 from packaging import Packaging
+from payment import Payment
 
 # to test type: python3 -m pytest test_dessert.py into the terminal
 
@@ -214,3 +215,9 @@ def test_packaging():
     assert icecream.get_packaging() == 'Bowl'
     sundae = Sundae()
     assert sundae.get_packaging() == 'Boat'
+
+def test_payment():
+    test_order = Order()
+    assert test_order.payment_method(1) == 'CASH'
+    assert test_order.payment_method(2) == 'CARD'
+    assert test_order.payment_method(3) == 'PHONE'
