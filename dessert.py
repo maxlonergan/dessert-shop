@@ -35,7 +35,7 @@ class DessertItem(Packaging, ABC):
         '''
         self.package_type = package
         
-    def _is_valid_operand(self, price):
+    def _is_valid_operand(self, price): #implement hasattr() in order to return item if it has required attributes
         pass  
     def __eq__(self, other):
         pass
