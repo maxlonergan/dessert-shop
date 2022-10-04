@@ -218,5 +218,3 @@ Enter payment method:
 
 
 main()
-
-# print(payment_options())

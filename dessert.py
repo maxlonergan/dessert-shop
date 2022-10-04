@@ -4,10 +4,11 @@ This module contains the dessert class heirarchy except for the classes
 contained in packaging.py
 '''
 from abc import ABC
-from cgi import test
 from packaging import Packaging
 from payment import *
+from functools import total_ordering
 
+@total_ordering
 class DessertItem(Packaging, ABC):
     '''
     Dessert super class, all classes will extend from here
@@ -33,6 +34,14 @@ class DessertItem(Packaging, ABC):
         sets what should be used to package the item
         '''
         self.package_type = package
+        
+    def _is_valid_operand(self, price):
+        pass  
+    def __eq__(self, other):
+        pass
+    def __lt__(self, other):
+        pass
+
 
 class Candy(DessertItem):
     '''

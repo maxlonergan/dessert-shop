@@ -28,9 +28,3 @@ class Payment(ABC):
             self._pay_type = PayType(new_type).name
         else:
             print('it dont work')
-
-
-# payment = Payment(5)
-# payment.pay_type = 1
-
-# print(payment.pay_type)
