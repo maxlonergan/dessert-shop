@@ -54,7 +54,7 @@ class DessertItem(Packaging, ABC):
 
 class Candy(DessertItem):
     '''
-    candy class 
+    candy class
     constructor (name, candy_weight, price_per_pound)
     '''
     def __init__(self, name='', candy_weight=1.50, price_per_pound=2.50):
@@ -115,6 +115,7 @@ class IceCream(DessertItem):
     def calculate_cost(self, price, scoops):
         sub_total = price * scoops
         total = sub_total
+        self.item_cost = total
         return total
     def __str__(self):
         package = super().get_packaging()
@@ -139,6 +140,7 @@ class Sundae(IceCream):
     def calculate_cost(self, scoops, scoop_price, topping_price):
         sub_total = (scoops * scoop_price) + topping_price
         total = sub_total
+        self.item_cost = total
         return total
     def __str__(self):
         package = super().get_packaging()
@@ -225,16 +227,10 @@ class Order(Payment):
         receipt = (f'Paid with {payment}')
         return receipt
 
-candy = Candy()
-cookie = Cookie()
-candy_two = Candy()
-cookie.calculate_cost(1.75, 2)
-candy.calculate_cost(5.00, 1.75)
-candy_two.calculate_cost(5.00, 1.75)
+icecream = IceCream()
+icecream.calculate_cost(2.00, 4)
+sundae = Sundae()
+sundae.calculate_cost(4, 2.5, .69)
 
-print(candy.item_cost)
-print(cookie.item_cost)
-y = cookie < candy
-x = candy == candy_two
-print(y)
-print(x)
+print(icecream.item_cost)
+print(sundae.item_cost)
