@@ -14,6 +14,7 @@ class DessertItem(Packaging, ABC):
     Dessert super class, all classes will extend from here
     The default name attribute should be an empty string
     '''
+    item_cost = 0
     tax_percent = 7.25
     def __init__(self, name=''):
         self.name = name
@@ -34,14 +35,21 @@ class DessertItem(Packaging, ABC):
         sets what should be used to package the item
         '''
         self.package_type = package
-        
-    def _is_valid_operand(self, cls): #implement hasattr() in order to return item if it has required attributes
+
+    def is_valid_operand(self, cls): 
         return hasattr(cls, 'item_cost')
-        pass
+
     def __eq__(self, other):
-        pass
+        if self.item_cost == other.item_cost:
+            return True
+        else: 
+            return False
     def __lt__(self, other):
-        pass
+        if self.item_cost < other.item_cost:
+            return True
+        else:
+            return False
+
 
 
 class Candy(DessertItem):
@@ -49,7 +57,6 @@ class Candy(DessertItem):
     candy class 
     constructor (name, candy_weight, price_per_pound)
     '''
-    item_cost = 0
     def __init__(self, name='', candy_weight=1.50, price_per_pound=2.50):
         super().__init__(name)
         super().set_packaging('Bag')
@@ -82,7 +89,9 @@ class Cookie(DessertItem):
     def calculate_cost(self, price, amount):
         # tax = super().calculate_tax(price)
         ratio = price / 12
-        return ratio * amount
+        cost = ratio * amount
+        self.item_cost = cost
+        return cost
     def __str__(self):
         package = super().get_packaging()
         cost = self.calculate_cost(self.price_per_dozen, self.cookie_quantity)
@@ -217,6 +226,15 @@ class Order(Payment):
         return receipt
 
 candy = Candy()
-print(candy._is_valid_operand(Candy))
+cookie = Cookie()
+candy_two = Candy()
+cookie.calculate_cost(1.75, 2)
+candy.calculate_cost(5.00, 1.75)
+candy_two.calculate_cost(5.00, 1.75)
 
 print(candy.item_cost)
+print(cookie.item_cost)
+y = cookie < candy
+x = candy == candy_two
+print(y)
+print(x)
