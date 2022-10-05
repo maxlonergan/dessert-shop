@@ -36,7 +36,7 @@ class DessertItem(Packaging, ABC):
         self.package_type = package
         
     def _is_valid_operand(self, price): #implement hasattr() in order to return item if it has required attributes
-        pass  
+        pass
     def __eq__(self, other):
         pass
     def __lt__(self, other):
@@ -45,16 +45,19 @@ class DessertItem(Packaging, ABC):
 
 class Candy(DessertItem):
     '''
-    candy class
+    candy class 
     constructor (name, candy_weight, price_per_pound)
     '''
+    item_cost = 0
     def __init__(self, name='', candy_weight=1.50, price_per_pound=2.50):
         super().__init__(name)
         super().set_packaging('Bag')
         self.candy_weight = candy_weight
         self.price_per_pound = price_per_pound
     def calculate_cost(self, price, weight):
-        return price * weight
+        cost = price * weight
+        self.item_cost = cost
+        return cost
     def __str__(self):
         package = super().get_packaging()
         cost = self.calculate_cost(self.price_per_pound, self.candy_weight)
@@ -211,3 +214,10 @@ class Order(Payment):
         payment = order.payment_method(self.counter)
         receipt = (f'Paid with {payment}')
         return receipt
+
+candy = Candy()
+candy.calculate_cost(.75, .5)
+x = hasattr(Candy, 'item_cost')
+
+print(candy.item_cost)
+print(x)
