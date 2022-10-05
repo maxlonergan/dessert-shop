@@ -178,7 +178,6 @@ class Order(Payment):
     def order_cost(self, item_list):
         '''
         adds up the subtotal of the order before tax
-        should probably rework to be closer to order_tax
         '''
         count = []
         for item in item_list:
