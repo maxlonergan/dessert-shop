@@ -226,11 +226,3 @@ class Order(Payment):
         payment = order.payment_method(self.counter)
         receipt = (f'Paid with {payment}')
         return receipt
-
-icecream = IceCream()
-icecream.calculate_cost(2.00, 4)
-sundae = Sundae()
-sundae.calculate_cost(4, 2.5, .69)
-
-print(icecream.item_cost)
-print(sundae.item_cost)
