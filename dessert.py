@@ -35,7 +35,8 @@ class DessertItem(Packaging, ABC):
         '''
         self.package_type = package
         
-    def _is_valid_operand(self, price): #implement hasattr() in order to return item if it has required attributes
+    def _is_valid_operand(self, cls): #implement hasattr() in order to return item if it has required attributes
+        return hasattr(cls, 'item_cost')
         pass
     def __eq__(self, other):
         pass
@@ -216,8 +217,6 @@ class Order(Payment):
         return receipt
 
 candy = Candy()
-candy.calculate_cost(.75, .5)
-x = hasattr(Candy, 'item_cost')
+print(candy._is_valid_operand(Candy))
 
 print(candy.item_cost)
-print(x)
