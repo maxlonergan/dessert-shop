@@ -227,17 +227,4 @@ def rearrange(item_list):
 
 main()
 
-# candy = Candy()
-# candy.item_cost = 4.5
-# cookie = Cookie()
-# cookie.item_cost = 3.5
-# sundae = Sundae()
-# sundae.item_cost = 6.75
 
-
-# test_list = [sundae, candy, cookie]
-
-# test_list.sort(key=rearrange)
-
-# for item in test_list:
-#     print(item)
