@@ -221,3 +221,12 @@ def test_payment():
     assert test_order.payment_method(1) == 'CASH'
     assert test_order.payment_method(2) == 'CARD'
     assert test_order.payment_method(3) == 'PHONE'
+
+def test_equal():
+    test_order = Order()
+    candy = Candy('',2,2)
+    test_candy = Candy('',2,2)
+    assert candy == test_candy
+    cookie = Cookie()
+    icecream = IceCream()
+    sundae = Sundae()

@@ -45,8 +45,8 @@ class DessertItem(Packaging, ABC):
         '''
         if self.item_cost == other.item_cost:
             return True
-        else: 
-            return False
+        return False
+
     def __lt__(self, other):
         '''
         enables the < operator to compare costs between DessertItem objects
@@ -231,3 +231,12 @@ class Order(Payment):
         payment = order.payment_method(self.counter)
         receipt = (f'Paid with {payment}')
         return receipt
+
+
+test_candy = Candy('',2,2)
+
+candy = Candy('',2,2)
+print(test_candy == candy)
+
+
+
