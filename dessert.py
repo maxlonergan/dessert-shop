@@ -40,11 +40,17 @@ class DessertItem(Packaging, ABC):
         return hasattr(cls, 'item_cost')
 
     def __eq__(self, other):
+        '''
+        enables the == operator to compare costs between DessertItem objects
+        '''
         if self.item_cost == other.item_cost:
             return True
         else: 
             return False
     def __lt__(self, other):
+        '''
+        enables the < operator to compare costs between DessertItem objects
+        '''
         if self.item_cost < other.item_cost:
             return True
         else:
