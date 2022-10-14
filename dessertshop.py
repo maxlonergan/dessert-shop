@@ -20,26 +20,26 @@ def main():
     order = Order()
     order.add(customer_order)
 
-    order.items = order.items[0] # without this order.items is a list within a list
-    print(order.items)
-    quit()
-    order_subtotal = order.order_cost(order.items)
-    tax_subttotal = order.order_tax(order.items)
+    order_items = order.items[0] # without this order.items is a list within a list
+
+    order_count = len(order_items)
+    order_subtotal = order.order_cost(order_items)
+    tax_subttotal = order.order_tax(order_items)
     subtotal_sum = round(sum(order_subtotal), 2)
     tax_sum = round(sum(tax_subttotal), 2)
+    order_items.sort()
     
     final_total = round(subtotal_sum + tax_sum, 2)
     order.counter = payment_options() # order.counter keeps track of which option was picked from the terminal
-
-
+    
 
     print('----------------------Receipt-------------------------')
-    for item in order.items:
+    for item in order_items:
         print(item)
     print('------------------------------------------------------')
     print('Order Subtotals:               ${}  [Tax: ${}]'.format(subtotal_sum, tax_sum))
     print('Order total:                   ${}'.format(final_total))
-    print('Total number of items in order: {}'.format(order.item_count()))
+    print('Total number of items in order: {}'.format(order_count))
     print('------------------------------------------------------')
     print(order)
 
@@ -220,20 +220,24 @@ Enter payment method:
             return payment_choice
 
 def rearrange(item_list):
+    item_cost = 0
     for item in item_list:
-        
-        print(item.item_cost)
+        item_cost = item.item_cost
+    return item_cost
 
-# main()
+main()
 
-candy = Candy()
-candy.item_cost = 4.5
-cookie = Cookie()
-cookie.item_cost = 3.5
-sundae = Sundae()
-sundae.item_cost = 6.75
+# candy = Candy()
+# candy.item_cost = 4.5
+# cookie = Cookie()
+# cookie.item_cost = 3.5
+# sundae = Sundae()
+# sundae.item_cost = 6.75
 
 
-test_list = [candy, cookie, sundae]
+# test_list = [sundae, candy, cookie]
 
-rearrange(test_list)
+# test_list.sort(key=rearrange)
+
+# for item in test_list:
+#     print(item)
