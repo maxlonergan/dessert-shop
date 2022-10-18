@@ -245,6 +245,7 @@ def test_equal():
     assert sundae == test_sundae
 
 def test_lt():
+    #add less and equal to tests for each class
     candy = Candy()
     test_candy = Candy()
     candy.calculate_cost(1.75, 5)
@@ -265,3 +266,26 @@ def test_lt():
     sundae.calculate_cost(4, 2.5, 1.75)
     test_sundae.calculate_cost(5, 2.5, 2.00)
     assert sundae < test_sundae
+
+def test_gt():
+    #add less and equal to tests for each class
+    candy = Candy()
+    test_candy = Candy()
+    candy.calculate_cost(2,.5)
+    test_candy.calculate_cost(4,.5)
+    assert test_candy.item_cost > candy.item_cost
+    cookie = Cookie()
+    test_cookie = Cookie()
+    cookie.calculate_cost(4.99, 6)
+    test_cookie.calculate_cost(4.99, 12)
+    assert test_cookie.item_cost > candy.item_cost
+    icecream = IceCream()
+    test_icecream = IceCream()
+    icecream.calculate_cost(2.50, 4)
+    test_icecream.calculate_cost(2.50, 5)
+    assert test_icecream.item_cost > icecream.item_cost
+    sundae = Sundae()
+    test_sundae = Sundae()
+    sundae.calculate_cost(4, 2.5, 1.75)
+    test_sundae.calculate_cost(5, 2.5, 2.00)
+    assert test_sundae.item_cost > sundae.item_cost

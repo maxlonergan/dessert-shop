@@ -238,5 +238,3 @@ test_candy.calculate_cost(1.5,.5)
 candy = Candy('',2,2)
 candy.calculate_cost(1.5,.5)
 print(test_candy == candy)
-
-
