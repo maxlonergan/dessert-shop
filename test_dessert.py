@@ -255,4 +255,13 @@ def test_lt():
     cookie.calculate_cost(4.99, 6)
     test_cookie.calculate_cost(4.99, 12)
     assert cookie < test_cookie
-    
+    icecream = IceCream()
+    test_icecream = IceCream()
+    icecream.calculate_cost(2.50, 4)
+    test_icecream.calculate_cost(2.50, 5)
+    assert icecream < test_icecream
+    sundae = Sundae()
+    test_sundae = Sundae()
+    sundae.calculate_cost(4, 2.5, 1.75)
+    test_sundae.calculate_cost(5, 2.5, 2.00)
+    assert sundae < test_sundae
