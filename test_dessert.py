@@ -223,10 +223,36 @@ def test_payment():
     assert test_order.payment_method(3) == 'PHONE'
 
 def test_equal():
-    test_order = Order()
-    candy = Candy('',2,2)
-    test_candy = Candy('',2,2)
+    candy = Candy()
+    test_candy = Candy()
+    candy.calculate_cost(1.5,1.5)
+    test_candy.calculate_cost(1.5,1.5)
     assert candy == test_candy
     cookie = Cookie()
+    test_cookie = Cookie()
+    cookie.calculate_cost(4.99, 12)
+    test_cookie.calculate_cost(4.99, 12)
+    assert cookie == test_cookie
     icecream = IceCream()
+    test_icecream = IceCream()
+    icecream.calculate_cost(1.75,6)
+    test_icecream.calculate_cost(1.75,6)
+    assert icecream == test_icecream
     sundae = Sundae()
+    test_sundae = Sundae()
+    sundae.calculate_cost(4, 1.75, 1.50)
+    test_sundae.calculate_cost(4, 1.75, 1.50)
+    assert sundae == test_sundae
+
+def test_lt():
+    candy = Candy()
+    test_candy = Candy()
+    candy.calculate_cost(1.75, 5)
+    test_candy.calculate_cost(4.5,2)
+    assert candy < test_candy
+    cookie = Cookie()
+    test_cookie = Cookie()
+    cookie.calculate_cost(4.99, 6)
+    test_cookie.calculate_cost(4.99, 12)
+    assert cookie < test_cookie
+    
