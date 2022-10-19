@@ -56,7 +56,12 @@ class DessertItem(Packaging, ABC):
         else:
             return False
 
-
+class SameItem(ABC):
+    T: str 
+    def is_same_as(self, other:T)->bool:
+        if type(self) == type(other):
+            return True
+        return False
 
 class Candy(DessertItem):
     '''
@@ -232,9 +237,3 @@ class Order(Payment):
         receipt = (f'Paid with {payment}')
         return receipt
 
-
-test_candy = Candy('',2,2)
-test_candy.calculate_cost(1.5,.5)
-candy = Candy('',2,2)
-candy.calculate_cost(1.5,.5)
-print(test_candy == candy)
