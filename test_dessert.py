@@ -246,9 +246,8 @@ def test_equal():
 
 def test_lt_equal_to():
     '''
-    tests < and <= in terms of an items price
+    tests < and <= for each class in terms of an items price
     '''
-    #add less and equal to tests for each class
     candy = Candy()
     test_candy = Candy()
     candy.calculate_cost(1.75, 5)
@@ -282,24 +281,39 @@ def test_lt_equal_to():
     assert sundae <= test_sundae
 
 def test_gt():
+    '''
+    tests > and >= for each class in terms of an items price
+    '''
     #add less and equal to tests for each class
     candy = Candy()
     test_candy = Candy()
     candy.calculate_cost(2,.5)
     test_candy.calculate_cost(4,.5)
     assert test_candy.item_cost > candy.item_cost
+    test_candy.calculate_cost(2, .5)
+    assert candy >= test_candy
+
     cookie = Cookie()
     test_cookie = Cookie()
     cookie.calculate_cost(4.99, 6)
     test_cookie.calculate_cost(4.99, 12)
     assert test_cookie.item_cost > candy.item_cost
+    test_cookie.calculate_cost(4.99, 6)
+    assert cookie >= test_cookie
+
     icecream = IceCream()
     test_icecream = IceCream()
     icecream.calculate_cost(2.50, 4)
     test_icecream.calculate_cost(2.50, 5)
     assert test_icecream.item_cost > icecream.item_cost
+    test_icecream.calculate_cost(2.50, 4)
+    assert icecream >= test_icecream
+
     sundae = Sundae()
     test_sundae = Sundae()
     sundae.calculate_cost(4, 2.5, 1.75)
     test_sundae.calculate_cost(5, 2.5, 2.00)
     assert test_sundae.item_cost > sundae.item_cost
+    test_sundae.calculate_cost(4, 2.5, 1.75)
+    assert sundae >= test_sundae
+    
