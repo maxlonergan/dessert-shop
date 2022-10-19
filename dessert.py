@@ -90,14 +90,14 @@ class Candy(DessertItem, SameItem):
 
     def is_same_as(self, other: 'Candy') -> bool:
         if super().is_same_as(other):
-            if self.name == other.name:
+            if self.name.lower() == other.name.lower():
                 if self.price_per_pound == other.price_per_pound:
                     return True
         return False
 
 
 
-class Cookie(DessertItem):
+class Cookie(DessertItem, SameItem):
     '''
     cookie class
     constructor (name, cookie_quantity, price_per_dozen)
@@ -122,6 +122,13 @@ class Cookie(DessertItem):
      {self.cookie_quantity} @ ${self.price_per_dozen} dozen: ${round(cost, 2)}              [Tax: ${round(tax, 2)}]
         '''
         return receipt
+    def is_same_as(self, other:'Cookie') -> bool:
+        if super().is_same_as(other):
+            if self.name.lower() == other.name.lower():
+                if self.price_per_dozen == other.price_per_dozen:
+                    return True
+        return False
+
 
 class IceCream(DessertItem):
     '''
@@ -249,8 +256,10 @@ class Order(Payment):
 
 
 
-candy_one = Candy()
-candy_two = Candy('something', 1.2, .55)
+candy_one = Candy('soMethIng', .5, .55)
+candy_two = Candy('SomethiNG', 1.2, .55)
 cookie = Cookie()
+cookie_two = Cookie('something')
 
 print(candy_one.is_same_as(candy_two))
+print(cookie.is_same_as(cookie_two))
