@@ -7,6 +7,7 @@ from abc import ABC
 from packaging import Packaging
 from payment import *
 from functools import total_ordering
+from typing import Any
 
 @total_ordering
 class DessertItem(Packaging, ABC):
@@ -57,13 +58,13 @@ class DessertItem(Packaging, ABC):
             return False
 
 class SameItem(ABC):
-    T: str 
+    T = Any
     def is_same_as(self, other:T)->bool:
         if type(self) == type(other):
             return True
         return False
 
-class Candy(DessertItem):
+class Candy(DessertItem, SameItem):
     '''
     candy class
     constructor (name, candy_weight, price_per_pound)
@@ -86,6 +87,15 @@ class Candy(DessertItem):
      {self.candy_weight} @ ${self.price_per_pound}/lb: ${round(cost, 2)}               [Tax: ${round(tax, 2)}]
         '''
         return receipt
+
+    def is_same_as(self, other: 'Candy') -> bool:
+        if super().is_same_as(other):
+            if self.name == other.name:
+                if self.price_per_pound == other.price_per_pound:
+                    return True
+        return False
+
+
 
 class Cookie(DessertItem):
     '''
@@ -237,3 +247,10 @@ class Order(Payment):
         receipt = (f'Paid with {payment}')
         return receipt
 
+
+
+candy_one = Candy()
+candy_two = Candy('something', 1.2, .55)
+cookie = Cookie()
+
+print(candy_one.is_same_as(candy_two))
