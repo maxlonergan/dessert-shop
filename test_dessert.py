@@ -169,6 +169,9 @@ def test_modify_sundae():
     assert sundae.topping_price == 6.75
 
 def test_tax_attribute():
+    '''
+    tests for the tax attribute
+    '''
     candy = Candy()
     assert candy.tax_percent == 7.25
 
@@ -280,7 +283,7 @@ def test_lt_equal_to():
     test_sundae.calculate_cost(4, 2.5, 1.75)
     assert sundae <= test_sundae
 
-def test_gt():
+def test_gt_equal_to():
     '''
     tests > and >= for each class in terms of an items price
     '''
@@ -316,4 +319,17 @@ def test_gt():
     assert test_sundae.item_cost > sundae.item_cost
     test_sundae.calculate_cost(4, 2.5, 1.75)
     assert sundae >= test_sundae
-    
+
+def test_same_as_true():
+    candy = Candy()
+    candy_two = Candy()
+    cookie = Cookie()
+    cookie_two = Cookie()
+    assert candy.is_same_as(candy_two)
+    assert cookie.is_same_as(cookie_two)
+
+def test_same_as_false():
+    candy = Candy()
+    cookie = Cookie()
+    assert candy.is_same_as(cookie) == False
+    assert cookie.is_same_as(candy) == False
