@@ -95,8 +95,6 @@ class Candy(DessertItem, SameItem):
                     return True
         return False
 
-
-
 class Cookie(DessertItem, SameItem):
     '''
     cookie class
@@ -128,7 +126,6 @@ class Cookie(DessertItem, SameItem):
                 if self.price_per_dozen == other.price_per_dozen:
                     return True
         return False
-
 
 class IceCream(DessertItem):
     '''
@@ -254,12 +251,3 @@ class Order(Payment):
         receipt = (f'Paid with {payment}')
         return receipt
 
-
-
-candy_one = Candy('soMethIng', .5, .55)
-candy_two = Candy('SomethiNG', 1.2, .55)
-cookie = Cookie()
-cookie_two = Cookie('something')
-
-print(candy_one.is_same_as(candy_two))
-print(cookie.is_same_as(cookie_two))

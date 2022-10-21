@@ -18,21 +18,26 @@ def main():
     '''
     customer_order = main_menu()
     order = Order()
-    order.add(customer_order)
+    order.add(customer_order) # adds whatever is ordered into a list
 
     order_items = order.items[0] # without this order.items is a list within a list
 
     order_count = len(order_items)
+
+    # all the math for the prices happens in this chunk
     order_subtotal = order.order_cost(order_items)
     tax_subttotal = order.order_tax(order_items)
     subtotal_sum = round(sum(order_subtotal), 2)
     tax_sum = round(sum(tax_subttotal), 2)
-    order_items.sort()
-    
     final_total = round(subtotal_sum + tax_sum, 2)
-    order.counter = payment_options() # order.counter keeps track of which option was picked from the terminal
-    
 
+
+    order_items.sort() # sorts items from cheapest to most expensive
+
+    # order.counter keeps track of which option was picked from the terminal
+    order.counter = payment_options()
+
+    # everything below is in charge of printing the reciept
     print('----------------------Receipt-------------------------')
     for item in order_items:
         print(item)
@@ -199,6 +204,9 @@ def user_prompt_sundae():
     return sundae_order
 
 def payment_options():
+    '''
+    controls the payment options part of the dessert shop
+    '''
     payment_options = '''
 1. Cash
 2. Card
@@ -219,12 +227,5 @@ Enter payment method:
             payment_choice = 3
             return payment_choice
 
-def rearrange(item_list):
-    item_cost = 0
-    for item in item_list:
-        item_cost = item.item_cost
-    return item_cost
 
 main()
-
-
