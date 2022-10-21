@@ -34,6 +34,14 @@ def main():
 
     order_items.sort() # sorts items from cheapest to most expensive
 
+    for item in order_items:
+        if type(item) == Candy():
+            i = order_items.index(item)
+            if item.is_same_as(order_items[i+1]):
+                print('candy works')
+    
+    quit()
+
     # order.counter keeps track of which option was picked from the terminal
     order.counter = payment_options()
 
