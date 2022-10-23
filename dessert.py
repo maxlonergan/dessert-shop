@@ -194,6 +194,10 @@ class Order(Payment):
         '''
         if not isinstance(item, Candy) and not isinstance(item, Cookie):
             self.items.append(item)
+        if isinstance(item, Candy):
+            pass
+        if isinstance(item, Cookie):
+            pass
         self.items.append(item)
 
     def item_count(self):
