@@ -19,8 +19,6 @@ def main():
     customer_order = main_menu()
     order = Order()
     order.add(customer_order) # adds whatever is ordered into a list
-
-    # quit()
     order_count = len(order.items)
 
     # all the math for the prices happens in this chunk

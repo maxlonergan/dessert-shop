@@ -195,10 +195,13 @@ class Order(Payment):
         for item in order_list:
             self.items.append(item)
             for _ in range (0, len(self.items)-1):
-                if item.is_same_as(order_list[_]):
-                    print('candy works')
+                if isinstance(item, Candy):
+                    if item.is_same_as(order_list[_]):
+                        item.candy_weight += order_list[_].candy_weight
+                        order_list.remove(item)
                 else:
-                    print('candy not works')
+                    print('its not candy')
+        self.items = order_list
     def item_count(self):
         '''
         returns how many items are in the order list
