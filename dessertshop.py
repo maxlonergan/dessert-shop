@@ -20,8 +20,6 @@ def main():
     order = Order()
     order.add(customer_order) # adds whatever is ordered into a list
 
-    # order_items = order.items[0] # without this order.items is a list within a list
-    print(order.items)
     # quit()
     order_count = len(order.items)
 
@@ -35,7 +33,7 @@ def main():
     order.items.sort() # sorts items from cheapest to most expensive
     
 
-    # order.counter keeps track of which option was picked from the terminal
+    # order.counter keeps track of which payment option was picked from the terminal
     order.counter = payment_options()
 
     # everything below is in charge of printing the reciept
