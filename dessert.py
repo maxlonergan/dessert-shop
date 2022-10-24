@@ -188,17 +188,12 @@ class Order(Payment):
         self.pay_method = Payment().pay_type
         self.counter = 1
 
-    def add(self, item):
+    def add(self, order_list):
         '''
         adds an order to the item list
         '''
-        if not isinstance(item, Candy) and not isinstance(item, Cookie):
+        for item in order_list:
             self.items.append(item)
-        if isinstance(item, Candy):
-            pass
-        if isinstance(item, Cookie):
-            pass
-        self.items.append(item)
 
     def item_count(self):
         '''

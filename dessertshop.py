@@ -20,28 +20,27 @@ def main():
     order = Order()
     order.add(customer_order) # adds whatever is ordered into a list
 
-    order_items = order.items[0] # without this order.items is a list within a list
-
-    order_count = len(order_items)
+    # order_items = order.items[0] # without this order.items is a list within a list
+    print(order.items)
+    # quit()
+    order_count = len(order.items)
 
     # all the math for the prices happens in this chunk
-    order_subtotal = order.order_cost(order_items)
-    tax_subttotal = order.order_tax(order_items)
+    order_subtotal = order.order_cost(order.items)
+    tax_subttotal = order.order_tax(order.items)
     subtotal_sum = round(sum(order_subtotal), 2)
     tax_sum = round(sum(tax_subttotal), 2)
     final_total = round(subtotal_sum + tax_sum, 2)
 
-
-    order_items.sort() # sorts items from cheapest to most expensive
-    print(order_items)
-    quit()
+    order.items.sort() # sorts items from cheapest to most expensive
+    
 
     # order.counter keeps track of which option was picked from the terminal
     order.counter = payment_options()
 
     # everything below is in charge of printing the reciept
     print('----------------------Receipt-------------------------')
-    for item in order_items:
+    for item in order.items:
         print(item)
     print('------------------------------------------------------')
     print('Order Subtotals:               ${}  [Tax: ${}]'.format(subtotal_sum, tax_sum))
