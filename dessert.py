@@ -84,7 +84,7 @@ class Candy(DessertItem, SameItem):
         tax = round(self.calculate_tax(cost), 2)
         receipt = f'''
 {self.name}  ({package})
-     {self.candy_weight} @ ${self.price_per_pound}/lb: ${round(cost, 2)}               [Tax: ${round(tax, 2)}]
+     {self.candy_weight}lb @ ${self.price_per_pound}/lb: ${round(cost, 2)}               [Tax: ${round(tax, 2)}]
         '''
         return receipt
 
@@ -198,9 +198,13 @@ class Order(Payment):
                 if isinstance(item, Candy):
                     if item.is_same_as(order_list[_]):
                         item.candy_weight += order_list[_].candy_weight
-                        order_list.remove(item)
+                        order_list.remove(item) #removes compared item from the list
+                elif isinstance(item, Cookie):
+                    if item.is_same_as(order_list[_]):
+                        item.cookie_quantity += order_list[_].cookie_quantity
+                        order_list.remove(item) #removes compared item from the list
                 else:
-                    print('its not candy')
+                    print('its not works')
         self.items = order_list
     def item_count(self):
         '''

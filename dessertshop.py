@@ -29,7 +29,6 @@ def main():
     final_total = round(subtotal_sum + tax_sum, 2)
 
     order.items.sort() # sorts items from cheapest to most expensive
-    
 
     # order.counter keeps track of which payment option was picked from the terminal
     order.counter = payment_options()
