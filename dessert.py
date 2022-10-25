@@ -203,8 +203,7 @@ class Order(Payment):
                     if item.is_same_as(order_list[_]):
                         item.cookie_quantity += order_list[_].cookie_quantity
                         order_list.remove(item) #removes compared item from the list
-                else:
-                    print('its not works')
+
         self.items = order_list
     def item_count(self):
         '''
