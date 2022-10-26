@@ -26,6 +26,10 @@ class Customer():
         self.order_history.append(order)
         return self
 
+customer_db: dict[str,Customer] = {
+    'John':Customer('John')
+}
+
 def main():
     '''
     adds some items to the order class
@@ -245,4 +249,10 @@ Enter payment method:
             return payment_choice
 
 
-main()
+# main()
+
+print('enter your name')
+customer_name = input()
+customer_db.update({customer_name:Customer(customer_name)})
+customer_db[customer_name].customer_id = 1000
+print(customer_db[customer_name].customer_id)
