@@ -12,6 +12,20 @@ from dessert import Sundae
 from dessert import Order
 
 
+class Customer():
+    '''
+    customer class
+    '''
+    next_customer_id: int = 0
+    def __init__(self, name) -> None:
+        self.customer_name: str = name
+        self.order_history: list[Order] = []
+        self.customer_id: int = 1
+
+    def add2history(self,order:Order):
+        self.order_history.append(order)
+        return self
+
 def main():
     '''
     adds some items to the order class
@@ -43,6 +57,9 @@ def main():
     print('Total number of items in order: {}'.format(order_count))
     print('------------------------------------------------------')
     print(order)
+    print('press y and "enter" to place another order')
+ 
+
 
 def main_menu():
     '''
@@ -225,3 +242,5 @@ Enter payment method:
 
 
 main()
+
+print()
