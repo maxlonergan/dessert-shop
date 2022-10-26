@@ -261,16 +261,4 @@ class Order(Payment):
         payment = order.payment_method(self.counter)
         receipt = (f'Paid with {payment}')
         return receipt
-
-# print('hit y')
-# answer = input()
-# customer_choice = True
-# if answer == 'y':
-#     customer_choice = True
-#     while customer_choice is True:
-#         item = input()
-#         if item == 'yes':
-#             print('type yes')
-#             customer_choice = True
-#         else:
-#             customer_choice = False
+        

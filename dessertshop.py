@@ -57,8 +57,12 @@ def main():
     print('Total number of items in order: {}'.format(order_count))
     print('------------------------------------------------------')
     print(order)
-    print('press y and "enter" to place another order')
- 
+    print('press y and enter to place another order')
+    answer = input()
+    if answer == 'y':
+        main()
+    else:
+        quit()
 
 
 def main_menu():
@@ -242,5 +246,3 @@ Enter payment method:
 
 
 main()
-
-print()
