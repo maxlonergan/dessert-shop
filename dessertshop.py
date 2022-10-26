@@ -29,6 +29,7 @@ class Customer():
 customer_db: dict[str,Customer] = {
     'John':Customer('John')
 }
+customer_db['John'].customer_id = 1000
 
 def main():
     '''
@@ -48,6 +49,11 @@ def main():
 
     order.items.sort() # sorts items from cheapest to most expensive
 
+    print('Enter the customer name:')
+    cust_name = str(input())
+    check_database(customer_db, cust_name)
+    print(customer_db)
+    quit()
     # order.counter keeps track of which payment option was picked from the terminal
     order.counter = payment_options()
 
@@ -248,11 +254,15 @@ Enter payment method:
             payment_choice = 3
             return payment_choice
 
+def check_database(db, name):
+    '''
+    checks if a name is in the customer database
+    if the name isn't in the database the name gets added
+    '''
+    if name in db:
+        print('thats already a customer silly')
+    else:
+        db.update({name:Customer(name)})
 
-# main()
+main()
 
-print('enter your name')
-customer_name = input()
-customer_db.update({customer_name:Customer(customer_name)})
-customer_db[customer_name].customer_id = 1000
-print(customer_db[customer_name].customer_id)
