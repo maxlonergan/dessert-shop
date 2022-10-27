@@ -30,6 +30,7 @@ customer_db: dict[str,Customer] = {
     'John':Customer('John')
 }
 customer_db['John'].customer_id = 1000
+customer_db['John'].order_history = ['something random']
 
 def main():
     '''
@@ -51,9 +52,9 @@ def main():
 
     print('Enter the customer name:')
     cust_name = str(input())
-    check_database(customer_db, cust_name)
-    print(customer_db)
-    quit()
+    check_database(customer_db, cust_name, order)
+    cust_id = customer_db[cust_name].customer_id
+    num_orders = len(customer_db[cust_name].order_history)
     # order.counter keeps track of which payment option was picked from the terminal
     order.counter = payment_options()
 
@@ -67,11 +68,15 @@ def main():
     print('Total number of items in order: {}'.format(order_count))
     print('------------------------------------------------------')
     print(order)
+    print('------------------------------------------------------')
+    print(f'Customer Name: {cust_name}    Customer ID: {cust_id}   Total Orders: {num_orders}')
+
     print('press y and enter to place another order')
     answer = input()
     if answer == 'y':
         main()
     else:
+        print('See ya!')
         quit()
 
 
@@ -254,15 +259,20 @@ Enter payment method:
             payment_choice = 3
             return payment_choice
 
-def check_database(db, name):
+def check_database(database, name, order):
     '''
     checks if a name is in the customer database
     if the name isn't in the database the name gets added
     '''
-    if name in db:
-        print('thats already a customer silly')
+    if name in database:
+        database[name].add2history(order)
+        # print(database[name].order_history)
     else:
-        db.update({name:Customer(name)})
+        database.update({name:Customer(name)})
+        database[name].customer_id = len(database) + 1000
+        database[name].add2history(order)
+        # print(database[name].order_history)
+
 
 main()
 
