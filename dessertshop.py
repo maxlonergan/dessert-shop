@@ -79,7 +79,6 @@ def main():
         print('See ya!')
         quit()
 
-
 def main_menu():
     '''
     controls the main menu console interface
@@ -89,6 +88,7 @@ def main_menu():
 2. Cookie
 3. Ice cream
 4. Sundae
+5. Admin Module
 Which would you like to add to the order? (1-4, Enter for done): 
         '''
     order = []
@@ -101,8 +101,10 @@ Which would you like to add to the order? (1-4, Enter for done):
             order.append(user_prompt_cookie())
         elif item == '3':
             order.append(user_prompt_icecream())
-        elif item =='4':
+        elif item == '4':
             order.append(user_prompt_sundae())
+        elif item == '5':
+            admin_module()
         else:
             return order
 
@@ -272,7 +274,15 @@ def check_database(database, name, order):
         database[name].customer_id = len(database) + 1000
         database[name].add2history(order)
         # print(database[name].order_history)
+def admin_module():
+    options = '''
+1. Shop Customer List
+2. Customer Order List
+3. Best Customer 
+4. Exit Admin Module
+    '''
+    print(options)
+    answer = input()
 
-
-# main()
+main()
 
