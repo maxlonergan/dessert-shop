@@ -274,5 +274,5 @@ def check_database(database, name, order):
         # print(database[name].order_history)
 
 
-main()
+# main()
 
