@@ -89,7 +89,7 @@ def main_menu():
 3. Ice cream
 4. Sundae
 5. Admin Module
-Which would you like to add to the order? (1-4, Enter for done): 
+Which would you like to add to the order? (1-5, Enter for done): 
         '''
     order = []
     while True:
@@ -280,14 +280,16 @@ def admin_module():
 2. Customer Order List
 3. Best Customer 
 4. Exit Admin Module
+what would you like to do (1-4, Enter for done):
     '''
     while True:
         print(options)
         answer = input()
         if answer == '1':
-            print('option one was picked')
+            for item in customer_db:
+                print(f'Customer Name: {item}    Customer ID:{customer_db[item].customer_id}')
         elif answer == '2':
-            print('option two was picked')
+            print('enter')
         elif answer == '3':
             print('option three was picked')
         elif answer =='4':
@@ -297,4 +299,6 @@ def admin_module():
 
 
 # main()
+check_database(customer_db, 'bob', ['candy'])
+check_database(customer_db, 'nancy', ['cookie'])
 admin_module()
