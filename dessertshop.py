@@ -281,8 +281,20 @@ def admin_module():
 3. Best Customer 
 4. Exit Admin Module
     '''
-    print(options)
-    answer = input()
+    while True:
+        print(options)
+        answer = input()
+        if answer == '1':
+            print('option one was picked')
+        elif answer == '2':
+            print('option two was picked')
+        elif answer == '3':
+            print('option three was picked')
+        elif answer =='4':
+            print('option 4 was picked')
 
-main()
 
+
+
+# main()
+admin_module()
