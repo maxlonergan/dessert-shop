@@ -286,16 +286,28 @@ what would you like to do (1-4, Enter for done):
         print(options)
         answer = input()
         if answer == '1':
-            for item in customer_db:
-                print(f'Customer Name: {item}    Customer ID:{customer_db[item].customer_id}')
+            prompt_customer_list()
         elif answer == '2':
-            print('enter')
+            prompt_order_list()
         elif answer == '3':
             print('option three was picked')
         elif answer =='4':
             print('option 4 was picked')
 
+def prompt_customer_list():
+    '''
+    controls the first option in the admin module
+    '''
+    for item in customer_db:
+        print(f'Customer Name: {item}    Customer ID:{customer_db[item].customer_id}')
 
+def prompt_order_list():
+    '''
+    controls the second option in the admin module
+    '''
+    print('enter customer name')
+    name = input()
+    print(f'Customer Name: {name}     Customer ID: {customer_db[name].customer_id}')
 
 
 # main()
