@@ -308,7 +308,11 @@ def prompt_order_list():
     print('enter customer name')
     name = input()
     print(f'Customer Name: {name}     Customer ID: {customer_db[name].customer_id}')
+    print('------------------------------------------------------')
+    print('Order #: ')
 
+def prompt_best_customer():
+    pass
 
 # main()
 check_database(customer_db, 'bob', ['candy'])
