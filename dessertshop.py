@@ -30,7 +30,9 @@ customer_db: dict[str,Customer] = {
     'John':Customer('John')
 }
 customer_db['John'].customer_id = 1000
-customer_db['John'].order_history = [['something random'],['something else random'], ['stuff']]
+test_order = Order()
+# test_order.add(Candy())
+customer_db['John'].order_history = []
 
 def main():
     '''
@@ -275,6 +277,9 @@ def check_database(database, name, order):
         database[name].add2history(order)
         # print(database[name].order_history)
 def admin_module():
+    '''
+    controls the admin module
+    '''
     options = '''
 1. Shop Customer List
 2. Customer Order List
@@ -313,15 +318,27 @@ def prompt_order_list():
     print('------------------------------------------------------')
     i=1
     for item in order_history:
+        order = item
+        order_subtotal = order.order_cost(order.items)
+        tax_subttotal = order.order_tax(order.items)
+        subtotal_sum = round(sum(order_subtotal), 2)
+        tax_sum = round(sum(tax_subttotal), 2)
+        final_total = round(subtotal_sum + tax_sum, 2)
         print(f'Order #: {i}')
+        print('----------------------Receipt-------------------------')
+        for item in order.items:
+            print(item)
+        print(f'total number of items in order: {len(order.items)}')
+        print(f'Order Subtotals:   ${subtotal_sum} [Tax: ${tax_sum}]')
+        print(f'Order Total: ${final_total}')
+        print('------------------------------------------------------')
+        print(order)
         i+=1
-        
-    print(order_len)
 
 def prompt_best_customer():
     pass
 
-# main()
-check_database(customer_db, 'bob', ['candy'])
-check_database(customer_db, 'nancy', ['cookie'])
-admin_module()
+main()
+# check_database(customer_db, 'bob', ['candy'])
+# check_database(customer_db, 'nancy', ['cookie'])
+# admin_module()
