@@ -30,7 +30,7 @@ customer_db: dict[str,Customer] = {
     'John':Customer('John')
 }
 customer_db['John'].customer_id = 1000
-customer_db['John'].order_history = ['something random']
+customer_db['John'].order_history = [['something random'],['something else random'], ['stuff']]
 
 def main():
     '''
@@ -308,8 +308,15 @@ def prompt_order_list():
     print('enter customer name')
     name = input()
     print(f'Customer Name: {name}     Customer ID: {customer_db[name].customer_id}')
+    order_history = customer_db[name].order_history
+    order_len = len(customer_db[name].order_history)
     print('------------------------------------------------------')
-    print('Order #: ')
+    i=1
+    for item in order_history:
+        print(f'Order #: {i}')
+        i+=1
+        
+    print(order_len)
 
 def prompt_best_customer():
     pass
