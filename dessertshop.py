@@ -32,7 +32,7 @@ customer_db: dict[str,Customer] = {
 customer_db['John'].customer_id = 1000
 test_order = Order()
 # test_order.add(Candy())
-customer_db['John'].order_history = []
+customer_db['John'].order_history = ['order1','order2','order3']
 
 def main():
     '''
@@ -295,9 +295,9 @@ what would you like to do (1-4, Enter for done):
         elif answer == '2':
             prompt_order_list()
         elif answer == '3':
-            print('option three was picked')
+            prompt_best_customer()
         elif answer =='4':
-            print('option 4 was picked')
+            return
 
 def prompt_customer_list():
     '''
@@ -314,7 +314,6 @@ def prompt_order_list():
     name = input()
     print(f'Customer Name: {name}     Customer ID: {customer_db[name].customer_id}')
     order_history = customer_db[name].order_history
-    order_len = len(customer_db[name].order_history)
     print('------------------------------------------------------')
     i=1
     for item in order_history:
@@ -336,9 +335,18 @@ def prompt_order_list():
         i+=1
 
 def prompt_best_customer():
-    pass
+    '''
+    controls the third option in the admin module
+    '''
+    length_list = []
+    for customer in customer_db.items():
+        length_list.append(len(customer[1].order_history))
+    longest_order = max(length_list)
+    fav_cus = 'random dude'
+    print(f'Our most valued customer is: {fav_cus}!')
 
-main()
-# check_database(customer_db, 'bob', ['candy'])
-# check_database(customer_db, 'nancy', ['cookie'])
+# main()
+check_database(customer_db, 'bob', ['candy'])
+check_database(customer_db, 'nancy', ['cookie'])
 # admin_module()
+prompt_best_customer()
