@@ -32,7 +32,7 @@ customer_db: dict[str,Customer] = {
 customer_db['John'].customer_id = 1000
 test_order = Order()
 # test_order.add(Candy())
-customer_db['John'].order_history = ['order1','order2','order3']
+customer_db['John'].order_history = ['order1']
 
 def main():
     '''
@@ -342,11 +342,13 @@ def prompt_best_customer():
     for customer in customer_db.items():
         length_list.append(len(customer[1].order_history))
     longest_order = max(length_list)
-    fav_cus = 'random dude'
-    print(f'Our most valued customer is: {fav_cus}!')
+    for customer in customer_db.items():
+        if len(customer[1].order_history) == longest_order:
+            fav_cus = customer[0]
+            print(f'Our most valued customer is: {fav_cus}!')
 
-# main()
-check_database(customer_db, 'bob', ['candy'])
-check_database(customer_db, 'nancy', ['cookie'])
+main()
+# check_database(customer_db, 'bob', ['candy'])
+# check_database(customer_db, 'nancy', ['cookie'])
 # admin_module()
-prompt_best_customer()
+# prompt_best_customer()
