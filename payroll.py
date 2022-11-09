@@ -14,3 +14,19 @@ class Hourly(Classification):
     compute the Hourly employee's pay
     '''
     pass
+
+class Salaried(Classification):
+    '''
+    Know the employee's salary
+    Compute the Salaried employee's pay
+    '''
+    pass
+
+class Commissioned(Salaried):
+    '''
+    know the employee's commision rate
+    add/store new reciepts
+    compute commisioned employee's pay (includes salary)
+    '''
+    pass
+
