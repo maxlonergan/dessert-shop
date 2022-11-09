@@ -30,3 +30,21 @@ class Commissioned(Salaried):
     '''
     pass
 
+class Employee:
+    def __init__(self, emp_id, first_name, last_name, address, city, state, zipcode, classification) -> None:
+        self.emp_id: str = emp_id
+        self.first_name: str = first_name
+        self.last_name: str = last_name
+        self.address: str = address
+        self.city: str = city
+        self.state: str = state
+        self.zipcode: str = zipcode
+        if classification == '3':
+            self.classification = Hourly()
+        elif classification == '2':
+            self.classification = Commissioned()
+        elif classification == '1':
+            self.classification = Salaried()
+
+test_hourly_employee = Employee('51-4678119', 'Issie', 'Scholard', '11 Texas Court', 'Columbia', 'Missouri','65218', '3')
+
