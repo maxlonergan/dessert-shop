@@ -13,6 +13,9 @@ class Hourly(Classification):
     add/store new time cards
     compute the Hourly employee's pay
     '''
+    def __init__(self, hourly_rate) -> None:
+        super().__init__()
+        self.hourly_rate = hourly_rate
     pass
 
 class Salaried(Classification):
@@ -60,7 +63,7 @@ def load_employees(emp_list):
     takes the list created from the csv file and should
     return a list of employee objects
     '''
-    worker_list = []
+    final_list = []
     for employee in emp_list:
         ident = employee[0]
         fname = employee[1]
@@ -71,9 +74,9 @@ def load_employees(emp_list):
         zipcode = employee[6]
         classification = employee[7]
         worker = Employee(ident, fname, lname, addy, city, state, zipcode, classification)
-        worker_list.append(worker)
-    worker_list.remove(worker_list[0])
-    return worker_list
+        final_list.append(worker)
+    final_list.remove(final_list[0])
+    return final_list
 
 def find_employee_by_id(ident, all_employees):
     '''
