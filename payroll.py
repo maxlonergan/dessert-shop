@@ -1,11 +1,13 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 
 class Classification(ABC):
     '''
     An abstract base class for the three types of classification
     specifies the abstract method issue_payment
     '''
-    pass
+    @abstractmethod
+    def issue_payment(self):
+        pass
 
 class Hourly(Classification):
     '''
@@ -16,6 +18,8 @@ class Hourly(Classification):
     def __init__(self, hourly_rate=10.75) -> None:
         super().__init__()
         self.hourly_rate = hourly_rate
+    def issue_payment(self):
+        return super().issue_payment()
 
 class Salaried(Classification):
     '''
@@ -25,7 +29,9 @@ class Salaried(Classification):
     def __init__(self, salary) -> None:
         super().__init__()
         self.salary = salary
-    pass
+
+    def issue_payment(self):
+        return super().issue_payment()
 
 class Commissioned(Salaried):
     '''
@@ -37,7 +43,9 @@ class Commissioned(Salaried):
         super().__init__(salary)
         self.rate = rate
         self.commission_pay = (salary, rate)
-    pass
+    
+    def issue_payment(self):
+        return super().issue_payment()
 
 class Employee:
     '''
