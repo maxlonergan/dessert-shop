@@ -70,15 +70,21 @@ def load_employees(emp_list):
         state = employee[5]
         zipcode = employee[6]
         classification = employee[7]
-
         worker = Employee(ident, fname, lname, addy, city, state, zipcode, classification)
         worker_list.append(worker)
-
-
     worker_list.remove(worker_list[0])
     return worker_list
 
+def find_employee_by_id(ident, all_employees):
+    '''
+    finds and returns an employee object based on the id number
+    test with 51-4678119
+    '''
+    for employee in all_employees:
+        if ident == employee.emp_id:
+            return employee
 
 worker_list = load_employees(employee_list)
 test_employee = worker_list[0]
-print(test_employee.classification)
+
+print(find_employee_by_id('51-4678119', worker_list).first_name)
