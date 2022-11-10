@@ -81,7 +81,7 @@ def find_employee_by_id(ident, all_employees):
     test with 51-4678119
     '''
     for employee in all_employees:
-        if ident == employee.emp_id:
+        if str(ident) == employee.emp_id:
             return employee
 
 worker_list = load_employees(employee_list)
