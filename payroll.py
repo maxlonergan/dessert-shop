@@ -31,6 +31,11 @@ class Commissioned(Salaried):
     pass
 
 class Employee:
+    '''
+    manage employee attributes
+    change employee's classification
+    initiate payment to employee
+    '''
     def __init__(self, emp_id, first_name, last_name, address, city, state, zipcode, classification) -> None:
         self.emp_id: str = emp_id
         self.first_name: str = first_name
@@ -46,5 +51,34 @@ class Employee:
         elif classification == '1':
             self.classification = Salaried()
 
-test_hourly_employee = Employee('51-4678119', 'Issie', 'Scholard', '11 Texas Court', 'Columbia', 'Missouri','65218', '3')
+with open('employees.csv', 'r') as emp:
+    lines = [line.strip() for line in emp]
+employee_list = [line.split(',') for line in lines]
 
+def load_employees(emp_list):
+    '''
+    takes the list created from the csv file and should
+    return a list of employee objects
+    '''
+    worker_list = []
+    for employee in emp_list:
+        ident = employee[0]
+        fname = employee[1]
+        lname = employee[2]
+        addy = employee[3]
+        city = employee[4]
+        state = employee[5]
+        zipcode = employee[6]
+        classification = employee[7]
+
+        worker = Employee(ident, fname, lname, addy, city, state, zipcode, classification)
+        worker_list.append(worker)
+
+
+    worker_list.remove(worker_list[0])
+    return worker_list
+
+
+worker_list = load_employees(employee_list)
+test_employee = worker_list[0]
+print(test_employee.classification)
