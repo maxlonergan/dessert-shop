@@ -82,7 +82,10 @@ def load_employees(emp_list):
     takes the list created from the csv file and should
     return a list of employee objects
     '''
-    final_list = []
+    total_list = []
+    hourly_employees = []
+    commisioned_employees = []
+    salaried_employees = []
     for employee in emp_list:
         ident = employee[0]
         fname = employee[1]
@@ -95,18 +98,22 @@ def load_employees(emp_list):
         if classification == '3':
             hourly_pay = employee[10]
             worker = Employee(ident, fname, lname, addy, city, state, zipcode, classification, hourly_pay)
-            final_list.append(worker)
+            total_list.append(worker)
+            hourly_employees.append((worker.first_name, worker.last_name))
         if classification == '2':
             commission = (employee[8], employee[9])
             worker = Employee(ident, fname, lname, addy, city, state, zipcode, classification, commission)
-            final_list.append(worker)
+            total_list.append(worker)
+            commisioned_employees.append((worker.first_name, worker.last_name))
         if classification == '1':
             salary = employee[8]
             worker = Employee(ident, fname, lname, addy, city, state, zipcode, classification, salary)
-            final_list.append(worker)
+            total_list.append(worker)
+            salaried_employees.append((worker.first_name, worker.last_name))
 
     # final_list.remove(final_list[0])
-    return final_list
+    print(hourly_employees)
+    return total_list
 
 def find_employee_by_id(ident, all_employees):
     '''
@@ -125,9 +132,10 @@ def process_timecards():
             id_num = timecard[0]
             actual_time = [float(time) for time in timecard[1:]]
             employee = find_employee_by_id(id_num, worker_list)
-            total_hours = sum(actual_time)
+            employee.classification.hourly_record.append(actual_time)
 
-
+def process_reciepts():
+    pass
 
 worker_list = load_employees(employee_list)
 hourly_test = find_employee_by_id('51-4678119', worker_list)
@@ -140,4 +148,5 @@ commission_test = find_employee_by_id('68-9609244', worker_list)
 
 process_timecards()
 
-# print(find_employee_by_id('51-4678119', worker_list).first_name)
+print(hourly_test.classification.hourly_record)
+
