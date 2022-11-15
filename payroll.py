@@ -44,6 +44,7 @@ class Commissioned(Salaried):
         super().__init__(salary)
         self.rate = rate
         self.commission_pay = (salary, rate)
+        self.reciepts = []
     
     def issue_payment(self):
         return super().issue_payment()
@@ -77,7 +78,7 @@ employee_list = [line.split(',') for line in lines]
 
 
 
-def load_employees(emp_list):
+def load_employees():
     '''
     takes the list created from the csv file and should
     return a list of employee objects
@@ -86,7 +87,7 @@ def load_employees(emp_list):
     hourly_employees = []
     commisioned_employees = []
     salaried_employees = []
-    for employee in emp_list:
+    for employee in employee_list:
         ident = employee[0]
         fname = employee[1]
         lname = employee[2]
@@ -112,35 +113,48 @@ def load_employees(emp_list):
             salaried_employees.append((worker.first_name, worker.last_name))
 
     # final_list.remove(final_list[0])
-    print(hourly_employees)
     return total_list
 
-def find_employee_by_id(ident, all_employees):
+def find_employee_by_id(ident):
     '''
     finds and returns an employee object based on the id number
     test with 51-4678119
     '''
-    for employee in all_employees:
+    for employee in worker_list:
         if str(ident) == employee.emp_id:
             return employee
 
 def process_timecards():
+    '''
+    adds whatever hours to hourly_rate in Hourly class
+    '''
     with open('timecards.csv', 'r') as timecards:
         lines = [line.strip() for line in timecards]
         timecard_list = [line.split(',') for line in lines]
         for timecard in timecard_list:
             id_num = timecard[0]
             actual_time = [float(time) for time in timecard[1:]]
-            employee = find_employee_by_id(id_num, worker_list)
+            employee = find_employee_by_id(id_num)
             employee.classification.hourly_record.append(actual_time)
 
 def process_reciepts():
-    pass
+    '''
+    adds reciepts to reciepts in Commissioned 
+    '''
+    with open('reciepts.csv', 'r') as reciepts_file:
+        lines = [line.strip() for line in reciepts_file]
+        reciepts_list = [line.split(',') for line in lines]
+        for reciept in reciepts_list:
+            id_num = reciept[0]
+            reciept_floats = [float(rec) for rec in reciept[1:]]
+            employee = find_employee_by_id(id_num)
+            employee.classification.reciepts.append(reciept_floats)
 
-worker_list = load_employees(employee_list)
-hourly_test = find_employee_by_id('51-4678119', worker_list)
-salary_test = find_employee_by_id('11-0469486', worker_list)
-commission_test = find_employee_by_id('68-9609244', worker_list)
+
+worker_list = load_employees()
+hourly_test = find_employee_by_id('51-4678119')
+salary_test = find_employee_by_id('11-0469486')
+commission_test = find_employee_by_id('68-9609244')
 
 # print(hourly_test.classification.hourly_rate)
 # print(salary_test.classification.salary)
@@ -148,5 +162,7 @@ commission_test = find_employee_by_id('68-9609244', worker_list)
 
 process_timecards()
 
-print(hourly_test.classification.hourly_record)
+process_reciepts()
+
+print(hourly_test.first_name)
 
