@@ -21,6 +21,7 @@ class Hourly(Classification):
         super().__init__()
         self.hourly_rate = hourly_rate
         self.hourly_record = []
+        self.total_pay = sum(self.hourly_record)
     def issue_payment(self):
         return super().issue_payment()
 
@@ -32,6 +33,7 @@ class Salaried(Classification):
     def __init__(self, salary) -> None:
         super().__init__()
         self.salary = salary
+        self.paycheck = float(salary) / 24
 
     def issue_payment(self):
         return super().issue_payment()
@@ -73,6 +75,20 @@ class Employee:
             self.classification = Commissioned(salary, rate)
         elif classification == '1':
             self.classification = Salaried(pay)
+    def issue_payment(self):
+        with open('payment.txt', 'w') as payment_file:
+            if isinstance(self.classification, Hourly):
+                total_hours = sum(self.classification.hourly_record[0])
+                pay = total_hours * float(self.classification.hourly_rate)
+                emp = find_employee_by_id(self.emp_id).first_name
+                payment_file.writelines(f'{emp}: ${str(pay)}')
+            if isinstance(self.classification, Salaried):
+                emp = find_employee_by_id(self.emp_id).first_name
+                paycheck = str(self.classification.paycheck)
+                payment_file.writelines(f'{emp}: ${paycheck}')
+
+
+
 
 with open('employees.csv', 'r') as emp:
     lines = [line.strip() for line in emp]
@@ -167,5 +183,6 @@ process_timecards()
 
 process_receipts()
 
-print(hourly_test.first_name)
-
+# hourly_test.issue_payment()
+# hourly_test.issue_payment()
+salary_test.issue_payment()
