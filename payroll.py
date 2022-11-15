@@ -1,4 +1,6 @@
 from abc import ABC, abstractmethod
+import os, os.path, shutil 
+
 
 class Classification(ABC):
     '''
@@ -137,7 +139,7 @@ def process_timecards():
             employee = find_employee_by_id(id_num)
             employee.classification.hourly_record.append(actual_time)
 
-def process_reciepts():
+def process_receipts():
     '''
     adds reciepts to reciepts in Commissioned 
     '''
@@ -151,6 +153,7 @@ def process_reciepts():
             employee.classification.reciepts.append(reciept_floats)
 
 
+
 worker_list = load_employees()
 hourly_test = find_employee_by_id('51-4678119')
 salary_test = find_employee_by_id('11-0469486')
@@ -162,7 +165,7 @@ commission_test = find_employee_by_id('68-9609244')
 
 process_timecards()
 
-process_reciepts()
+process_receipts()
 
 print(hourly_test.first_name)
 
