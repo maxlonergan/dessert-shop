@@ -4,12 +4,6 @@ import os, os.path, shutil
  
 PAY_LOGFILE = 'paylog.txt'
 
-def run_payroll():
-    if os.path.exists(PAY_LOGFILE): # pay_log_file is a global variable holding ‘payroll.txt’
-        os.remove(PAY_LOGFILE)
-    for emp in worker_list: # employees is the global list of Employee objects
-        emp.issue_payment() # issue_payment calls a method in the classification
-        # object to compute the pay
 
 def main(): 
     load_employees() # You will implement the first three of these functions 

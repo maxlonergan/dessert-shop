@@ -22,8 +22,15 @@ class Hourly(Classification):
         self.hourly_rate = hourly_rate
         self.hourly_record = []
         self.total_pay = sum(self.hourly_record)
-    def issue_payment(self):
-        return super().issue_payment()
+    def issue_payment(self, emp_name):
+        super().issue_payment()
+        if not self.hourly_record:
+            pay = 0
+            return pay
+        total_hours = sum(self.hourly_record[0])
+        pay = total_hours * float(self.hourly_rate)
+        with open('payroll.txt', 'a') as payment_file:
+            payment_file.write(f'Mailing ${round(pay, 2)} to {emp_name.full_name} at {emp_name.address}\n')
 
 class Salaried(Classification):
     '''
@@ -35,8 +42,11 @@ class Salaried(Classification):
         self.salary = salary
         self.paycheck = float(salary) / 24
 
-    def issue_payment(self):
-        return super().issue_payment()
+    def issue_payment(self, emp_name):
+        super().issue_payment()
+        paycheck = self.paycheck
+        with open('payroll.txt', 'a') as payment_file:
+            payment_file.write(f'Mailing ${round(paycheck, 2)} to {emp_name.full_name} at {emp_name.address}\n')
 
 class Commissioned(Salaried):
     '''
@@ -46,13 +56,20 @@ class Commissioned(Salaried):
     '''
     def __init__(self, salary, rate) -> None:
         super().__init__(salary)
-        self.rate = rate
-        self.commission_pay = (salary, rate)
+        self.rate = '.' + rate
+        self.paycheck = float(salary) / 24
         self.reciepts = []
     
-    def issue_payment(self):
-        return super().issue_payment()
-
+    def issue_payment(self, emp_name):
+        # super().issue_payment()
+        if not self.reciepts:
+            total_pay = self.paycheck
+            return total_pay
+        reciepts_sum = sum(self.reciepts[0])
+        commission_pay = float(self.rate) * reciepts_sum
+        total_pay = self.paycheck + commission_pay
+        with open('payroll.txt', 'a') as payment_file:
+            payment_file.write(f'Mailing ${round(total_pay, 2)} to {emp_name.full_name} at {emp_name.address}\n')
 class Employee:
     '''
     manage employee attributes
@@ -63,10 +80,8 @@ class Employee:
         self.emp_id: str = emp_id
         self.first_name: str = first_name
         self.last_name: str = last_name
-        self.address: str = address
-        self.city: str = city
-        self.state: str = state
-        self.zipcode: str = zipcode
+        self.full_name: str = f'{first_name} {last_name}'
+        self.address: str = f'{address} {city} {state} {zipcode}'
         if classification == '3':
             self.classification = Hourly(pay)
         elif classification == '2':
@@ -76,18 +91,12 @@ class Employee:
         elif classification == '1':
             self.classification = Salaried(pay)
     def issue_payment(self):
-        with open('payment.txt', 'w') as payment_file:
-            if isinstance(self.classification, Hourly):
-                total_hours = sum(self.classification.hourly_record[0])
-                pay = total_hours * float(self.classification.hourly_rate)
-                emp = find_employee_by_id(self.emp_id).first_name
-                payment_file.writelines(f'{emp}: ${str(pay)}')
-            if isinstance(self.classification, Salaried):
-                emp = find_employee_by_id(self.emp_id).first_name
-                paycheck = str(self.classification.paycheck)
-                payment_file.writelines(f'{emp}: ${paycheck}')
-
-
+        if isinstance(self.classification, Hourly):
+            self.classification.issue_payment(find_employee_by_id(self.emp_id))
+        elif isinstance(self.classification, Commissioned):
+            self.classification.issue_payment(find_employee_by_id(self.emp_id))
+        elif isinstance(self.classification, Salaried):
+            self.classification.issue_payment(find_employee_by_id(self.emp_id))
 
 
 with open('employees.csv', 'r') as emp:
@@ -180,9 +189,14 @@ commission_test = find_employee_by_id('68-9609244')
 # print(commission_test.classification.commission_pay)
 
 process_timecards()
-
 process_receipts()
 
-# hourly_test.issue_payment()
-# hourly_test.issue_payment()
-salary_test.issue_payment()
+PAY_LOG_FILE = 'payroll.txt'
+def run_payroll():
+    if os.path.exists(PAY_LOG_FILE): # pay_log_file is a global variable holding ‘payroll.txt’
+        os.remove(PAY_LOG_FILE)
+    for emp in worker_list: # employees is the global list of Employee objects
+        emp.issue_payment() # issue_payment calls a method in the classification
+        # object to compute the pay
+
+print(hourly_test.address)
