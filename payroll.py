@@ -59,7 +59,7 @@ class Commissioned(Salaried):
         self.rate = '.' + rate
         self.paycheck = float(salary) / 24
         self.reciepts = []
-    
+
     def issue_payment(self, emp_name):
         # super().issue_payment()
         if not self.reciepts:
@@ -70,6 +70,7 @@ class Commissioned(Salaried):
         total_pay = self.paycheck + commission_pay
         with open('payroll.txt', 'a') as payment_file:
             payment_file.write(f'Mailing ${round(total_pay, 2)} to {emp_name.full_name} at {emp_name.address}\n')
+
 class Employee:
     '''
     manage employee attributes
@@ -91,12 +92,25 @@ class Employee:
         elif classification == '1':
             self.classification = Salaried(pay)
     def issue_payment(self):
+        '''
+        issues payment through each subclasses method issue_payment
+        '''
         if isinstance(self.classification, Hourly):
             self.classification.issue_payment(find_employee_by_id(self.emp_id))
         elif isinstance(self.classification, Commissioned):
             self.classification.issue_payment(find_employee_by_id(self.emp_id))
         elif isinstance(self.classification, Salaried):
             self.classification.issue_payment(find_employee_by_id(self.emp_id))
+    def make_salaried(self, new_salary):
+        '''
+        makes an employee object salaried
+        '''
+        self.classification = Salaried(new_salary)
+    def make_commissioned(self, new_salary, new_rate):
+        '''
+        makes an employee object commissioned
+        '''
+        self.classification = Commissioned(new_salary, new_rate)
 
 
 with open('employees.csv', 'r') as emp:
@@ -199,4 +213,3 @@ def run_payroll():
         emp.issue_payment() # issue_payment calls a method in the classification
         # object to compute the pay
 
-print(hourly_test.address)
