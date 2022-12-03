@@ -27,10 +27,16 @@ class Hourly(Classification):
         if not self.hourly_record:
             pay = 0
             return pay
-        total_hours = sum(self.hourly_record[0])
+        total_hours = sum(self.hourly_record)
         pay = total_hours * float(self.hourly_rate)
         with open('payroll.txt', 'a') as payment_file:
             payment_file.write(f'Mailing ${round(pay, 2)} to {emp_name.full_name} at {emp_name.address}\n')
+        self.hourly_record = []
+    def add_timecard(self, timecard):
+        '''
+        adds a timecard to an hourly employees record list
+        '''
+        self.hourly_record.append(timecard)
 
 class Salaried(Classification):
     '''
@@ -65,14 +71,18 @@ class Commissioned(Salaried):
         if not self.receipts:
             total_pay = self.paycheck
             return total_pay
-        reciepts_sum = sum(self.receipts[0])
+        reciepts_sum = sum(self.receipts)
         commission_pay = float(self.rate) * reciepts_sum
         total_pay = self.paycheck + commission_pay
         with open('payroll.txt', 'a') as payment_file:
             payment_file.write(f'Mailing ${round(total_pay, 2)} to {emp_name.full_name} at {emp_name.address}\n')
+        self.receipts = []
 
     def add_receipt(self, receipt):
-        self.receipts[0].append(receipt)
+        '''
+        adds a receipt to a commissioned employees receipt list
+        '''
+        self.receipts.append(receipt)
 
 class Employee:
     '''
@@ -104,6 +114,7 @@ class Employee:
             self.classification.issue_payment(find_employee_by_id(self.emp_id))
         elif isinstance(self.classification, Salaried):
             self.classification.issue_payment(find_employee_by_id(self.emp_id))
+
     def make_salaried(self, new_salary):
         '''
         makes an employee object salaried
@@ -184,7 +195,8 @@ def process_timecards():
             id_num = timecard[0]
             actual_time = [float(time) for time in timecard[1:]]
             employee = find_employee_by_id(id_num)
-            employee.classification.hourly_record.append(actual_time)
+            for flt in actual_time:
+                employee.classification.hourly_record.append(flt)
 
 def process_receipts():
     '''
@@ -197,7 +209,8 @@ def process_receipts():
             id_num = reciept[0]
             reciept_floats = [float(rec) for rec in reciept[1:]]
             employee = find_employee_by_id(id_num)
-            employee.classification.receipts.append(reciept_floats)
+            for flt in reciept_floats:
+                employee.classification.receipts.append(flt)
 
 with open('paylog.txt', 'w'):
     pass
@@ -220,10 +233,7 @@ commission_test = find_employee_by_id('68-9609244')
 # print(salary_test.classification.salary)
 # print(commission_test.classification.commission_pay)
 
-process_timecards()
-process_receipts()
+# process_timecards()
+# process_receipts()
 
-print(commission_test.classification.receipts)
-commission_test.classification.add_receipt(10)
-print(commission_test.classification.receipts)
 
