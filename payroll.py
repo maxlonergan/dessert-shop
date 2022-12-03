@@ -56,20 +56,23 @@ class Commissioned(Salaried):
     '''
     def __init__(self, salary, rate) -> None:
         super().__init__(salary)
-        self.rate = '.' + rate
+        self.rate = '.' + str(rate)
         self.paycheck = float(salary) / 24
-        self.reciepts = []
+        self.receipts = []
 
     def issue_payment(self, emp_name):
         # super().issue_payment()
-        if not self.reciepts:
+        if not self.receipts:
             total_pay = self.paycheck
             return total_pay
-        reciepts_sum = sum(self.reciepts[0])
+        reciepts_sum = sum(self.receipts[0])
         commission_pay = float(self.rate) * reciepts_sum
         total_pay = self.paycheck + commission_pay
         with open('payroll.txt', 'a') as payment_file:
             payment_file.write(f'Mailing ${round(total_pay, 2)} to {emp_name.full_name} at {emp_name.address}\n')
+
+    def add_receipt(self, receipt):
+        self.receipts[0].append(receipt)
 
 class Employee:
     '''
@@ -111,6 +114,11 @@ class Employee:
         makes an employee object commissioned
         '''
         self.classification = Commissioned(new_salary, new_rate)
+    def make_hourly(self, hourly_pay):
+        '''
+        makes an employee object hourly
+        '''
+        self.classification = Hourly(hourly_pay)
 
 
 with open('employees.csv', 'r') as emp:
@@ -189,9 +197,19 @@ def process_receipts():
             id_num = reciept[0]
             reciept_floats = [float(rec) for rec in reciept[1:]]
             employee = find_employee_by_id(id_num)
-            employee.classification.reciepts.append(reciept_floats)
+            employee.classification.receipts.append(reciept_floats)
 
+with open('paylog.txt', 'w'):
+    pass
 
+PAY_LOGFILE = 'payroll.txt'
+
+def run_payroll():
+    if os.path.exists(PAY_LOGFILE): # pay_log_file is a global variable holding ‘payroll.txt’
+        os.remove(PAY_LOGFILE)
+    for emp in worker_list: # employees is the global list of Employee objects
+        emp.issue_payment() # issue_payment calls a method in the classification
+        # object to compute the pay
 
 worker_list = load_employees()
 hourly_test = find_employee_by_id('51-4678119')
@@ -205,11 +223,7 @@ commission_test = find_employee_by_id('68-9609244')
 process_timecards()
 process_receipts()
 
-PAY_LOG_FILE = 'payroll.txt'
-def run_payroll():
-    if os.path.exists(PAY_LOG_FILE): # pay_log_file is a global variable holding ‘payroll.txt’
-        os.remove(PAY_LOG_FILE)
-    for emp in worker_list: # employees is the global list of Employee objects
-        emp.issue_payment() # issue_payment calls a method in the classification
-        # object to compute the pay
+print(commission_test.classification.receipts)
+commission_test.classification.add_receipt(10)
+print(commission_test.classification.receipts)
 
